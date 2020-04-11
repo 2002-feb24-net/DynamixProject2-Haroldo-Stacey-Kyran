@@ -35,7 +35,7 @@ steps:
 
 
 - script: |
-    dotnet build
+    dotnet build Dynamix
   displayName: 'dotnet build'
 
 - task: SonarCloudAnalyze@1
