@@ -46,7 +46,7 @@ steps:
 # Want a sonar cloud analysis even if tests fail
 
 
-- script: dotnet test --logger trx
+- script: dotnet test Dynamix --logger trx
   displayName: dotnet test
 
 # the default "condition" for every step is "succeeded()" - run this step if the previous step succeeded
