@@ -20,9 +20,10 @@ steps:
     ls
   displayName: 'Show directory contents'
 
+
 - task: SonarCloudPrepare@1
   inputs:
-    SonarCloud: 'sonarCloud-haroldoa'
+    SonarCloud: 'Dynamixp2'
     organization: '2002-feb24-net'
     scannerMode: 'MSBuild'
     projectKey: '2002-feb24-net_DynamixProject2-Haroldo-Stacey-Kyran'
@@ -30,6 +31,7 @@ steps:
       # Additional properties that will be passed to the scanner, 
       # Put one key=value per line, example:
        sonar.exclusions=**/lib/**
+
 
 
 - script: |
