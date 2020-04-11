@@ -13,6 +13,8 @@ namespace Dynamix.API
     {
         public static void Main(string[] args)
         {
+
+            //this is the ninja theme
             CreateHostBuilder(args).Build().Run();
         }
 
