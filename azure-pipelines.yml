@@ -65,3 +65,10 @@ steps:
 
 
 # Azure web app deploy here
+- task: AzureRmWebAppDeployment@4
+  inputs:
+    ConnectionType: 'AzureRM'
+    azureSubscription: 'Azure subscription 1(1221fe95-8e35-45f8-ae94-5e2cf04ba808)'
+    appType: 'webApp'
+    WebAppName: 'Dynamix'
+    packageForLinux: '$(System.DefaultWorkingDirectory)/**/*.zip'
