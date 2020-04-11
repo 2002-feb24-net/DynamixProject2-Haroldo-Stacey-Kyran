@@ -6,6 +6,8 @@
 trigger:
 - master
 
+pr: none
+
 pool:
   vmImage: 'ubuntu-latest'
 
@@ -14,6 +16,52 @@ steps:
   displayName: 'Run a one-line script'
 
 - script: |
-    echo Add other tasks to build, test, and deploy your project.
-    echo See https://aka.ms/yaml
-  displayName: 'Run a multi-line script'
+    echo 'Showing directory contents'
+    ls
+  displayName: 'Show directory contents'
+
+- task: SonarCloudPrepare@1
+  inputs:
+    SonarCloud: 'sonarCloud-haroldoa'
+    organization: '2002-feb24-net'
+    scannerMode: 'MSBuild'
+    projectKey: '2002-feb24-net_DynamixProject2-Haroldo-Stacey-Kyran'
+    extraProperties: |
+      # Additional properties that will be passed to the scanner, 
+      # Put one key=value per line, example:
+       sonar.exclusions=**/lib/**
+
+
+- script: |
+    dotnet build
+  displayName: 'dotnet build'
+
+- task: SonarCloudAnalyze@1
+
+- task: SonarCloudPublish@1
+  inputs:
+    pollingTimeoutSec: '300'
+# Want a sonar cloud analysis even if tests fail
+
+
+- script: dotnet test --logger trx
+  displayName: dotnet test
+
+# the default "condition" for every step is "succeeded()" - run this step if the previous step succeeded
+- task: PublishTestResults@2
+  condition: succeededOrFailed()
+  inputs:
+    testRunner: VSTest
+    testResultsFiles: '**/*.trx'
+
+  # have the build running agent running steps publish test build logs
+
+
+
+- task: DotNetCoreCLI@2
+  inputs:
+    command: 'publish'
+    publishWebProjects: true
+
+
+# Azure web app deploy here
