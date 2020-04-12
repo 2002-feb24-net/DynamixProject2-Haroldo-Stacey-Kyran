@@ -7,12 +7,14 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 
-namespace Dynamix.WebAPI
+namespace Dynamix.API
 {
     public class Program
     {
         public static void Main(string[] args)
         {
+
+            //this is the ninja theme
             CreateHostBuilder(args).Build().Run();
         }
 
