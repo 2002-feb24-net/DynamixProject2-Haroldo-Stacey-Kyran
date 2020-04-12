@@ -1,6 +1,6 @@
 using System;
 
-namespace Dynamix.WebAPI
+namespace Dynamix.API
 {
     public class WeatherForecast
     {
