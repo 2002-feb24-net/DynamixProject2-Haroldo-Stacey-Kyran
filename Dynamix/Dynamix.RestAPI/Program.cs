@@ -9,10 +9,13 @@ using Microsoft.Extensions.Logging;
 
 namespace Dynamix.WebAPI
 {
+    //Stacey was here
     public class Program
     {
         public static void Main(string[] args)
         {
+
+            //this is the ninja theme
             CreateHostBuilder(args).Build().Run();
         }
 
