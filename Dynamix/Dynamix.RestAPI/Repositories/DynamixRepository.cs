@@ -14,9 +14,27 @@ namespace Dynamix.API.Repositories
             private readonly List<Location> _location;
             private readonly List<LocationVisitor> _locVisitor;
             private readonly List<Comment> _comment;
-        public DynamixRepository()
+
+        private readonly DbDynamixContext context;
+
+        public CommentRepository commentRepo;
+        public EmojiRatingRepository emojiRRepo;
+        public LocationRepository locationRepo;
+        public LocationVisitorRepository locationVisitorRepo;
+        public ReviewRepository reviewRepo;
+        public UserRepository userRepo;
+        public DynamixRepository(
+            DbDynamixContext context
+            )
         {
-                        
+            // initialize all repos so they cannot go out of sync
+            // use dependency injection
+            commentRepo = new CommentRepository(context);
+            emojiRRepo = new EmojiRatingRepository(context);
+            locationRepo = new LocationRepository(context);
+            reviewRepo = new ReviewRepository(context);
+            userRepo = new UserRepository(context);
+
         }
     }
 }
