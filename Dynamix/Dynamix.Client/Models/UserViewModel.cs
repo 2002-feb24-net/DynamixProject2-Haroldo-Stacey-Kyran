@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Dynamix.API.Models;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -17,9 +18,12 @@ namespace Dynamix.Client.Models
         [DataType(DataType.EmailAddress)]
         public string Email { get; set; }
 
-        public UserViewModel()
+        public UserViewModel(User user)
         {
-
+            Name = user.Fullname;
+            passWord = user.Password;
+            Email = user.Email;
+            
         }
     }
 }

@@ -141,6 +141,8 @@ namespace Dynamix.API.Models
             {
                 entity.Property(e => e.UserId).HasColumnName("UserID");
 
+                entity.Property(e => e.Email).HasMaxLength(70);
+
                 entity.Property(e => e.Fullname).HasMaxLength(70);
 
                 entity.Property(e => e.Password)
