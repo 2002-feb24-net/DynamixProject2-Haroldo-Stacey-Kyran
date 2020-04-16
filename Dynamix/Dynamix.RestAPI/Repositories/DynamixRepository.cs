@@ -8,12 +8,6 @@ namespace Dynamix.API.Repositories
 {
     public class DynamixRepository
     {
-            private readonly List<User> _user;
-            private readonly List<Review> _review;
-            private readonly List<EmojiRating> _eRating;
-            private readonly List<Location> _location;
-            private readonly List<LocationVisitor> _locVisitor;
-            private readonly List<Comment> _comment;
 
         private readonly DbDynamixContext context;
 
@@ -23,9 +17,7 @@ namespace Dynamix.API.Repositories
         public LocationVisitorRepository locationVisitorRepo;
         public ReviewRepository reviewRepo;
         public UserRepository userRepo;
-        public DynamixRepository(
-            DbDynamixContext context
-            )
+        public DynamixRepository(DbDynamixContext context)
         {
             // initialize all repos so they cannot go out of sync
             // use dependency injection
@@ -34,7 +26,6 @@ namespace Dynamix.API.Repositories
             locationRepo = new LocationRepository(context);
             reviewRepo = new ReviewRepository(context);
             userRepo = new UserRepository(context);
-
         }
     }
 }
