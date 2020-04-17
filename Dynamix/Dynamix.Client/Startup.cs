@@ -5,9 +5,16 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Logging.Configuration;
+using Dynamix.API.Models;
+using Dynamix.API.Repositories;
+using Dynamix.API;
+
 
 namespace Dynamix.Client
 {
@@ -23,6 +30,15 @@ namespace Dynamix.Client
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddDbContext<DbDynamixContext>(x => x.UseSqlServer(Configuration.GetConnectionString("Default")));
+/*            services.AddScoped<ICommentRepository, CommentRepository>();
+*/            services.AddLogging(logger =>
+            {
+                logger.AddConfiguration(Configuration.GetSection("Logging"));
+/*                logger.AddAzureWebAppDiagnostics();
+*/                logger.AddConsole();
+                logger.AddDebug();
+            });
             services.AddControllersWithViews();
         }
 
