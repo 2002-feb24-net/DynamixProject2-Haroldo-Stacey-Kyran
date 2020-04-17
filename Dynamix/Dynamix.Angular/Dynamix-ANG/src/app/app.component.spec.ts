@@ -16,16 +16,16 @@ describe('AppComponent', () => {
     expect(app).toBeTruthy();
   });
 
-  it(`should have as title 'Dynamix-Angular'`, () => {
+  it(`should have as title 'Dynamix-ANG'`, () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
-    expect(app.title).toEqual('Dynamix-Angular');
+    expect(app.title).toEqual('Dynamix-ANG');
   });
 
   it('should render title', () => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
     const compiled = fixture.nativeElement;
-    expect(compiled.querySelector('.content span').textContent).toContain('Dynamix-Angular app is running!');
+    expect(compiled.querySelector('.content span').textContent).toContain('Dynamix-ANG app is running!');
   });
 });

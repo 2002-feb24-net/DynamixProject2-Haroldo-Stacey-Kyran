@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "Dynamix-Angular": {
+    "Dynamix-ANG": {
       "projectType": "application",
       "schematics": {},
       "root": "",
@@ -13,7 +13,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/Dynamix-Angular",
+            "outputPath": "dist/Dynamix-ANG",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -62,18 +62,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "Dynamix-Angular:build"
+            "browserTarget": "Dynamix-ANG:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "Dynamix-Angular:build:production"
+              "browserTarget": "Dynamix-ANG:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "Dynamix-Angular:build"
+            "browserTarget": "Dynamix-ANG:build"
           }
         },
         "test": {
@@ -110,15 +110,15 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "Dynamix-Angular:serve"
+            "devServerTarget": "Dynamix-ANG:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "Dynamix-Angular:serve:production"
+              "devServerTarget": "Dynamix-ANG:serve:production"
             }
           }
         }
       }
     }},
-  "defaultProject": "Dynamix-Angular"
+  "defaultProject": "Dynamix-ANG"
 }
