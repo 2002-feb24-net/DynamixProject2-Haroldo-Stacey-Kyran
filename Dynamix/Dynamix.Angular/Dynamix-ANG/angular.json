@@ -13,7 +13,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/Dynamix-ANG",
+            "outputPath": "dist/Dynamix-ANG/browser",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -115,6 +115,41 @@
           "configurations": {
             "production": {
               "devServerTarget": "Dynamix-ANG:serve:production"
+            }
+          }
+        },
+        "server": {
+          "builder": "@angular-devkit/build-angular:server",
+          "options": {
+            "outputPath": "dist/Dynamix-ANG/server",
+            "main": "src/main.server.ts",
+            "tsConfig": "tsconfig.server.json"
+          },
+          "configurations": {
+            "production": {
+              "outputHashing": "media",
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.prod.ts"
+                }
+              ],
+              "sourceMap": false,
+              "optimization": true
+            }
+          }
+        },
+        "app-shell": {
+          "builder": "@angular-devkit/build-angular:app-shell",
+          "options": {
+            "browserTarget": "Dynamix-ANG:build",
+            "serverTarget": "Dynamix-ANG:server",
+            "route": "shell"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "Dynamix-ANG:build:production",
+              "serverTarget": "Dynamix-ANG:server:production"
             }
           }
         }

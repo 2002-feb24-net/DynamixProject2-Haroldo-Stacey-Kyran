@@ -50,6 +50,10 @@ namespace Dynamix.WebAPI
                 app.UseDeveloperExceptionPage();
             }
 
+            app.UseCors("CorsPolicy");
+
+            app.UseMvc();
+
             app.UseHttpsRedirection();
 
             app.UseRouting();

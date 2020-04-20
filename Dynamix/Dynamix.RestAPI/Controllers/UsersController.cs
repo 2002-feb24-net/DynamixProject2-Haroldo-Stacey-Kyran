@@ -12,6 +12,7 @@ namespace Dynamix.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [EnableCors("Corspolicy")]
     public class UsersController : ControllerBase
     {
         private readonly DbDynamixContext _context;
@@ -21,7 +22,8 @@ namespace Dynamix.API.Controllers
             _context = context;
         }
 
-        [HttpGet("api/user")]
+        [HttpGet]
+        [ProducesResponseType(typeof(IEnumerable<User>), StatusCodes.Status200OK)]
         public async Task<ActionResult<IEnumerable<User>>> GetUser()
         {
             return await _context.User.ToListAsync();
@@ -45,6 +47,11 @@ namespace Dynamix.API.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> PutUser(int id, User user)
         {
+            if(!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
             if (id != user.UserId)
             {
                 return BadRequest();
@@ -75,6 +82,10 @@ namespace Dynamix.API.Controllers
         [HttpPost]
         public async Task<ActionResult<User>> PostUser(User user)
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
             _context.User.Add(user);
             await _context.SaveChangesAsync();
 
@@ -84,6 +95,7 @@ namespace Dynamix.API.Controllers
         [HttpDelete("{id}")]
         public async Task<ActionResult<User>> DeleteUser(int id)
         {
+
             var user = await _context.User.FindAsync(id);
             if (user == null)
             {
