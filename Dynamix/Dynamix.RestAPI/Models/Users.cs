@@ -3,9 +3,9 @@ using System.Collections.Generic;
 
 namespace Dynamix.API.Models
 {
-    public partial class User
+    public partial class Users
     {
-        public User()
+        public Users()
         {
             Comment = new HashSet<Comment>();
             LocationVisitor = new HashSet<LocationVisitor>();
@@ -13,10 +13,10 @@ namespace Dynamix.API.Models
         }
 
         public int UserId { get; set; }
+        public string FullName { get; set; }
+        public string Email { get; set; }
         public string Username { get; set; }
         public string Password { get; set; }
-        public string Fullname { get; set; }
-        public string Email { get; set; }
 
         public virtual ICollection<Comment> Comment { get; set; }
         public virtual ICollection<LocationVisitor> LocationVisitor { get; set; }

@@ -18,9 +18,9 @@ namespace Dynamix.Client.Models
         [DataType(DataType.EmailAddress)]
         public string Email { get; set; }
 
-        public UserViewModel(User user)
+        public UserViewModel(Users user)
         {
-            Name = user.Fullname;
+            Name = user.FullName;
             passWord = user.Password;
             Email = user.Email;
             

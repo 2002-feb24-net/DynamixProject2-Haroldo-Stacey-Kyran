@@ -6,13 +6,11 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Dynamix.API.Models;
-using Microsoft.AspNetCore.Cors;
 
 namespace Dynamix.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [EnableCors("Corspolicy")]
     public class UsersController : ControllerBase
     {
         private readonly DbDynamixContext _context;
@@ -22,42 +20,39 @@ namespace Dynamix.API.Controllers
             _context = context;
         }
 
+        // GET: api/Users
         [HttpGet]
-        [ProducesResponseType(typeof(IEnumerable<User>), StatusCodes.Status200OK)]
-        public async Task<ActionResult<IEnumerable<User>>> GetUser()
+        public async Task<ActionResult<IEnumerable<Users>>> GetUsers()
         {
-            return await _context.User.ToListAsync();
+            return await _context.Users.ToListAsync();
         }
 
         // GET: api/Users/5
-        [HttpGet("api/user/{id}")]
-        public async Task<ActionResult<User>> GetUser(int id)
+        [HttpGet("{id}")]
+        public async Task<ActionResult<Users>> GetUsers(int id)
         {
-            var user = await _context.User.FindAsync(id);
+            var users = await _context.Users.FindAsync(id);
 
-            if (user == null)
+            if (users == null)
             {
                 return NotFound();
             }
 
-            return user;
+            return users;
         }
 
-
+        // PUT: api/Users/5
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for
+        // more details see https://aka.ms/RazorPagesCRUD.
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutUser(int id, User user)
+        public async Task<IActionResult> PutUsers(int id, Users users)
         {
-            if(!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
-            if (id != user.UserId)
+            if (id != users.UserId)
             {
                 return BadRequest();
             }
 
-            _context.Entry(user).State = EntityState.Modified;
+            _context.Entry(users).State = EntityState.Modified;
 
             try
             {
@@ -65,7 +60,7 @@ namespace Dynamix.API.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!UserExists(id))
+                if (!UsersExists(id))
                 {
                     return NotFound();
                 }
@@ -78,39 +73,37 @@ namespace Dynamix.API.Controllers
             return NoContent();
         }
 
-
+        // POST: api/Users
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for
+        // more details see https://aka.ms/RazorPagesCRUD.
         [HttpPost]
-        public async Task<ActionResult<User>> PostUser(User user)
+        public async Task<ActionResult<Users>> PostUsers(Users users)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-            _context.User.Add(user);
+            _context.Users.Add(users);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetUser", new { id = user.UserId }, user);
+            return CreatedAtAction("GetUsers", new { id = users.UserId }, users);
         }
 
+        // DELETE: api/Users/5
         [HttpDelete("{id}")]
-        public async Task<ActionResult<User>> DeleteUser(int id)
+        public async Task<ActionResult<Users>> DeleteUsers(int id)
         {
-
-            var user = await _context.User.FindAsync(id);
-            if (user == null)
+            var users = await _context.Users.FindAsync(id);
+            if (users == null)
             {
                 return NotFound();
             }
 
-            _context.User.Remove(user);
+            _context.Users.Remove(users);
             await _context.SaveChangesAsync();
 
-            return user;
+            return users;
         }
 
-        private bool UserExists(int id)
+        private bool UsersExists(int id)
         {
-            return _context.User.Any(e => e.UserId == id);
+            return _context.Users.Any(e => e.UserId == id);
         }
     }
 }

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Dynamix.API.Repositories
 {
-    public class ReviewRepository : Repository<User>, IReviewRepository
+    public class ReviewRepository : Repository<Users>, IReviewRepository
     {
         DbDynamixContext context;
         public ReviewRepository(DbDynamixContext context)

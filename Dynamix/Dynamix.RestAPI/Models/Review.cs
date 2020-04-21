@@ -19,7 +19,7 @@ namespace Dynamix.API.Models
         public int LocationId { get; set; }
         public int CreatorUserId { get; set; }
 
-        public virtual User CreatorUser { get; set; }
+        public virtual Users CreatorUser { get; set; }
         public virtual Location Location { get; set; }
         public virtual EmojiRating RatingEmoji { get; set; }
         public virtual ICollection<Comment> Comment { get; set; }

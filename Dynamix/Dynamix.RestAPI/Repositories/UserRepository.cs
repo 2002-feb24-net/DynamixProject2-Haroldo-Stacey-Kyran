@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Dynamix.API.Repositories
 {
-    public class UserRepository : Repository<User>, IUserRepository
+    public class UserRepository : Repository<Users>, IUserRepository
     {
         DbDynamixContext context;
         public UserRepository (DbDynamixContext context)

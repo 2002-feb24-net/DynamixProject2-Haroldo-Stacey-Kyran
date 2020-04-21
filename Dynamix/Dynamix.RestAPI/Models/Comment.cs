@@ -11,6 +11,6 @@ namespace Dynamix.API.Models
         public int UserId { get; set; }
 
         public virtual Review Review { get; set; }
-        public virtual User User { get; set; }
+        public virtual Users User { get; set; }
     }
 }

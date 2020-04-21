@@ -20,7 +20,9 @@ namespace Dynamix.API.Models
         public virtual DbSet<Location> Location { get; set; }
         public virtual DbSet<LocationVisitor> LocationVisitor { get; set; }
         public virtual DbSet<Review> Review { get; set; }
-        public virtual DbSet<User> User { get; set; }
+        public virtual DbSet<Users> Users { get; set; }
+
+   
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -137,18 +139,24 @@ namespace Dynamix.API.Models
                     .HasConstraintName("FK_EmojiRating_Review");
             });
 
-            modelBuilder.Entity<User>(entity =>
+            modelBuilder.Entity<Users>(entity =>
             {
+                entity.HasKey(e => e.UserId);
+
                 entity.Property(e => e.UserId).HasColumnName("UserID");
 
-                entity.Property(e => e.Email).HasMaxLength(70);
+                entity.Property(e => e.Email)
+                    .IsRequired()
+                    .HasMaxLength(100)
+                    .IsUnicode(false);
 
-                entity.Property(e => e.Fullname).HasMaxLength(70);
+                entity.Property(e => e.FullName)
+                    .IsRequired()
+                    .HasMaxLength(70);
 
                 entity.Property(e => e.Password)
                     .IsRequired()
-                    .HasMaxLength(50)
-                    .IsUnicode(false);
+                    .HasMaxLength(100);
 
                 entity.Property(e => e.Username)
                     .IsRequired()
