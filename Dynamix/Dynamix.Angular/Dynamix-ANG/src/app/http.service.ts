@@ -11,18 +11,18 @@ export class HttpService {
   constructor(private _http: HttpClient) {
     this._url = env['APIUrl'];
     if(this._url == undefined){
-        this._url = 'http://localhost:5000';
+        this._url = 'https://localhost:44329/';
     }
 
   }
   getUser(id: string) {
-    return this._http.get(`${this._url}/api/user/${id}`);
+    return this._http.get(`${this._url}/api/users/${id}`);
   }
   getUserFromName(name: string) {
-    return this._http.get(`${this._url}/api/user/name/${name}`);
+    return this._http.get(`${this._url}/api/users/name/${name}`);
   }
   postUser(name: string, password: string) {
-    return this._http.post(`${this._url}/api/user`,
+    return this._http.post(`${this._url}/api/users`,
       { Name: name, Password: password }
     );
   }
