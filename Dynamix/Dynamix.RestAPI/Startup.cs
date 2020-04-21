@@ -34,7 +34,7 @@ namespace Dynamix.WebAPI
                     builder => builder.AllowAnyOrigin()
                     .AllowAnyMethod()
                     .AllowAnyHeader()
-                    .AllowCredentials());
+                    /*.AllowCredentials()*/);
             });
             services.AddDbContext<DbDynamixContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DbDynamix")));
             services.AddControllers();
