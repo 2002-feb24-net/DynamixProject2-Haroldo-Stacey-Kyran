@@ -12,7 +12,8 @@ import { HttpClientModule, HttpClientJsonpModule } from '@angular/common/http';
 import { AboutComponent } from './about/about.component';
 import { CreateComponent } from './create/create.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
-import {OAuthModule} from 'angular-oauth2-oidc';
+// import {OAuthModule} from 'angular-oauth2-oidc';
+import { UsersComponent } from './users/users.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import {OAuthModule} from 'angular-oauth2-oidc';
     LoginComponent,
     AboutComponent,
     CreateComponent,
-    DashboardComponent
+    DashboardComponent,
+    UsersComponent
   ],
   imports: [
     BrowserModule,
@@ -30,7 +32,7 @@ import {OAuthModule} from 'angular-oauth2-oidc';
     HttpClientModule,
     HttpClientJsonpModule,
     RouterModule,
-    OAuthModule.forRoot()
+    // OAuthModule.forRoot()
   ],
   providers: [HttpService],
   bootstrap: [AppComponent]
