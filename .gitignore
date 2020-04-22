@@ -368,3 +368,4 @@ healthchecksdb
 MigrationBackup/
 
 # End of https://www.gitignore.io/api/visualstudio,visualstudiocode
+/Dynamix/Dynamix.Angular/Dynamix-ANG/dist/Dynamix-ANG/browser
