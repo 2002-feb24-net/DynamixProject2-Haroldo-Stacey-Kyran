@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace Dynamix.API.Models
 {
@@ -14,8 +15,12 @@ namespace Dynamix.API.Models
 
         public int UserId { get; set; }
         public string FullName { get; set; }
+        [DataType(DataType.EmailAddress)]
+        [Required]
         public string Email { get; set; }
         public string Username { get; set; }
+        [DataType(DataType.Password)]
+        [Required]
         public string Password { get; set; }
 
         public virtual ICollection<Comment> Comment { get; set; }

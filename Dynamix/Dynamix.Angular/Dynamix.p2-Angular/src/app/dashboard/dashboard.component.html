@@ -1,8 +1,9 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/w3css/3/w3.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
@@ -22,12 +23,33 @@
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li><a><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
-        <li routerLink="/users"><a><span class="glyphicon glyphicon-user"></span>Sign Up</a></li>
+        <li routerLink="/sign-up"><a><span class="glyphicon glyphicon-user"></span>Sign Up</a></li>
       </ul>
     </div>
   </nav>
-  <div>
+  <section>
     <img class="homePhotos" src="https://wallpapershome.com/images/pages/pic_h/3171.jpg" style="width:100%">
-  </div>
+    <img class="homePhotos" src="https://wallpapershome.com/images/pages/pic_h/5000.jpg" style="width:100%">
+    <img class="homePhotos" src="https://wallpapershome.com/images/pages/pic_h/20310.jpg" style="width:100%">
+  </section>
+
+  <script>
+    // Automatic Slideshow - change image every 3 seconds
+    var myIndex = 0;
+    carousel();
+
+    function carousel() {
+      var i;
+      var x = document.getElementsByClassName("mySlides");
+      for (i = 0; i < x.length; i++) {
+        x[i].style.display = "none";
+      }
+      myIndex++;
+      if (myIndex > x.length) {myIndex = 1}
+      x[myIndex-1].style.display = "block";
+      setTimeout(carousel, 3000);
+    }
+    </script>
+
   </body>
   </html>
