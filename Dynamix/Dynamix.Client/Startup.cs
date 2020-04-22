@@ -30,7 +30,7 @@ namespace Dynamix.Client
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<DbDynamixContext>(x => x.UseSqlServer(Configuration.GetConnectionString("Default")));
+            services.AddDbContext<DbDynamixContext>(x => x.UseSqlServer(Configuration.GetConnectionString("DbDynamix")));
 /*            services.AddScoped<ICommentRepository, CommentRepository>();
 */            services.AddLogging(logger =>
             {

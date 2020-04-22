@@ -30,11 +30,10 @@ namespace Dynamix.WebAPI
             services.AddMvc(options => options.EnableEndpointRouting = false);
             services.AddCors(options =>
             {
-                options.AddPolicy("CorsPolicy",
-                    builder => builder.AllowAnyOrigin()
-                    .AllowAnyMethod()
-                    .AllowAnyHeader()
-                    /*.AllowCredentials()*/);
+                options.AddPolicy("AllowLocalAndAppServiceAngular", builder =>
+                    builder.WithOrigins("http://localhost:4200")
+                        .AllowAnyMethod()
+                        .AllowAnyHeader());
             });
             services.AddDbContext<DbDynamixContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DbDynamix")));
             services.AddControllers();
@@ -50,7 +49,7 @@ namespace Dynamix.WebAPI
                 app.UseDeveloperExceptionPage();
             }
 
-            app.UseCors("CorsPolicy");
+            app.UseCors("AllowLocalAndAppServiceAngular");
 
             app.UseMvc();
 
