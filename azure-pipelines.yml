@@ -75,6 +75,13 @@ steps:
     WebAppName: 'Dynamix'
     packageForLinux: '$(System.DefaultWorkingDirectory)/**/*.zip'
 
+# Make sure node.js is installed
+- task: UseNode@1
+  inputs:
+    version: '12.x'
+    checkLatest: true
+
+
 # build and deploy angular app
 
 - task: Npm@1
