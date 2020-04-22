@@ -74,3 +74,33 @@ steps:
     appType: 'webApp'
     WebAppName: 'Dynamix'
     packageForLinux: '$(System.DefaultWorkingDirectory)/**/*.zip'
+
+# build and deploy angular app
+
+- task: Npm@1
+  inputs:
+    command: 'custom'
+    workingDir: 'Dynamix/Dynamix.Angular/Dynamix.p2-Angular'
+    customCommand: 'run build-prod'
+  displayName: 'npm run build-prod'
+
+- task: ArchiveFiles@2
+  inputs:
+    rootFolderOrFile: 'Dynamix/Dynamix.Angular/Dynamix.p2-Angular/dist/Dynamix-p2-test'
+    includeRootFolder: true
+    archiveType: 'zip'
+    archiveFile: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'
+    replaceExistingArchive: true
+  displayName: 'Zip npm build dist'
+
+- task: PublishBuildArtifacts@1
+  inputs:
+    PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+    ArtifactName: 'drop'
+    publishLocation: 'Container'
+
+- script: |
+    cd Dynamix/Dynamix.Angular/Dynamix.p2-Angular
+    npm install
+    npm run build-prod
+  displayName: 'angular build-prod'
