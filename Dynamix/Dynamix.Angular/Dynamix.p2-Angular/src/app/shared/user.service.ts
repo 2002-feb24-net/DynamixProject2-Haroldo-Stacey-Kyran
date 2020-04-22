@@ -18,7 +18,7 @@ export class UserService {
   }
 
   postUsers(formData: User){
-    return this._http.post(this.rootURL+'/Users/name',formData);
+    return this._http.post(this.rootURL+'/Users',formData);
   }
 
   putEmployee(formData : User){

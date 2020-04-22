@@ -31,7 +31,7 @@ namespace Dynamix.WebAPI
             services.AddCors(options =>
             {
                 options.AddPolicy("AllowLocalAndAppServiceAngular", builder =>
-                    builder.WithOrigins("http://localhost:4200")
+                    builder.WithOrigins("http://localhost:4200", "https://dynamixhk.azurewebsites.net/ ")
                         .AllowAnyMethod()
                         .AllowAnyHeader());
             });
