@@ -122,5 +122,5 @@ steps:
     azureSubscription: 'Azure subscription 1(1221fe95-8e35-45f8-ae94-5e2cf04ba808)'
     appType: 'webApp'
     WebAppName: 'DynamixHK'
-    packageForLinux: $(Pipeline.Workspace)/app
+    packageForLinux: '$(System.DefaultWorkingDirectory)/**/*.zip'
   displayName: 'Deploy angular to app service'
