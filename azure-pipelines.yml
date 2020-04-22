@@ -64,6 +64,7 @@ steps:
   inputs:
     command: 'publish'
     publishWebProjects: true
+  displayName: 'dotnet publish'
 
 
 # Azure web app deploy here
@@ -83,7 +84,13 @@ steps:
 
 
 # build and deploy angular app
-- script: npm install --only=dev
+- script: npm install
+
+- script: |
+    cd Dynamix/Dynamix.Angular/Dynamix.p2-Angular
+    npm install
+    cd -
+  displayName: 'npm install'
 
 
 - task: Npm@1
