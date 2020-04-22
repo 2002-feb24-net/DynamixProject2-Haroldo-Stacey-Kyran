@@ -1,0 +1,8 @@
+{
+    "appService.zipIgnorePattern": [
+        "node_modules{,/**}",
+        ".vscode{,/**}"
+    ],
+    "appService.defaultWebAppToDeploy": "/subscriptions/1221fe95-8e35-45f8-ae94-5e2cf04ba808/resourceGroups/appsvc_linux_centralus/providers/Microsoft.Web/sites/DynamixHK",
+    "appService.deploySubpath": ""
+}
