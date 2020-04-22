@@ -84,7 +84,6 @@ steps:
 
 
 # build and deploy angular app
-- script: npm install
 
 - script: |
     cd Dynamix/Dynamix.Angular/Dynamix.p2-Angular
@@ -115,8 +114,11 @@ steps:
     ArtifactName: 'drop'
     publishLocation: 'Container'
 
-- script: |
-    cd Dynamix/Dynamix.Angular/Dynamix.p2-Angular
-    npm install
-    npm run build-prod
-  displayName: 'angular build-prod'
+- task: AzureRmWebAppDeployment@4
+  inputs:
+    ConnectionType: 'AzureRM'
+    azureSubscription: 'Azure subscription 1(1221fe95-8e35-45f8-ae94-5e2cf04ba808)'
+    appType: 'webApp'
+    WebAppName: 'DynamixHK'
+    packageForLinux: '$(System.DefaultWorkingDirectory)/**/*.zip'
+  displayName: 'Deploy angular to app service'
