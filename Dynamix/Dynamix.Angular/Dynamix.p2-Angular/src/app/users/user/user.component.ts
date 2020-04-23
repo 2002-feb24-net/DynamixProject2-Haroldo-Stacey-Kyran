@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { UserService } from 'src/app/shared/user.service';
 import { NgForm } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
+import { User } from 'src/app/shared/user.model';
 
 @Component({
   selector: 'app-user',
@@ -9,7 +10,8 @@ import { ToastrService } from 'ngx-toastr';
   styleUrls: ['./user.component.css']
 })
 export class UserComponent implements OnInit {
-
+user: User;
+emailPattern: "^[a-z0-9._%]"
   constructor(
     public service: UserService,
     private toastr: ToastrService) { }

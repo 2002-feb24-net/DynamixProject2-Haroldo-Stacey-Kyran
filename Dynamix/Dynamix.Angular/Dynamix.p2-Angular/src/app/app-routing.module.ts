@@ -4,6 +4,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { HomeComponent } from './home/home.component';
 import { UsersComponent } from './users/users.component';
 import { SignUpComponent } from './users/sign-up/sign-up.component';
+import { UploadComponent } from './home/upload/upload.component';
 
 
 const routes: Routes = [
@@ -11,7 +12,8 @@ const routes: Routes = [
   {path: 'dashboard', component: DashboardComponent},
   {path: 'home', component: HomeComponent},
   {path: 'users', component: UsersComponent},
-  {path: 'sign-up', component: SignUpComponent}
+  {path: 'sign-up', component: SignUpComponent},
+  {path: 'upload', component: UploadComponent}
 ];
 
 @NgModule({
@@ -21,4 +23,4 @@ exports: [RouterModule]
 })
 
 export class AppRoutingModule {}
-export const routingComponents = [DashboardComponent, HomeComponent, UsersComponent, SignUpComponent]
+export const routingComponents = [DashboardComponent, HomeComponent, UsersComponent, SignUpComponent, UploadComponent]
