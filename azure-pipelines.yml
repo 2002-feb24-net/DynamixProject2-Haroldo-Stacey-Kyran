@@ -38,6 +38,20 @@ steps:
     dotnet build Dynamix/Dynamix.RestAPI
   displayName: 'dotnet build'
 
+- script: |
+    dotnet publish Dynamix/Dynamix.RestAPI
+  displayName: 'dotnet publish'
+
+
+# Azure web app deploy here
+- task: AzureRmWebAppDeployment@4
+  inputs:
+    ConnectionType: 'AzureRM'
+    azureSubscription: 'Azure subscription 1(1221fe95-8e35-45f8-ae94-5e2cf04ba808)'
+    appType: 'webApp'
+    WebAppName: 'Dynamix'
+    packageForLinux: '$(System.DefaultWorkingDirectory)/**/*.zip'
+
 - task: SonarCloudAnalyze@1
 
 - task: SonarCloudPublish@1
@@ -60,19 +74,7 @@ steps:
 
 
 
-- script: |
-    dotnet publish Dynamix/Dynamix.RestAPI
-  displayName: 'dotnet publish'
 
-
-# Azure web app deploy here
-- task: AzureRmWebAppDeployment@4
-  inputs:
-    ConnectionType: 'AzureRM'
-    azureSubscription: 'Azure subscription 1(1221fe95-8e35-45f8-ae94-5e2cf04ba808)'
-    appType: 'webApp'
-    WebAppName: 'Dynamix'
-    packageForLinux: '$(System.DefaultWorkingDirectory)/**/*.zip'
 
 # Make sure node.js is installed
 - task: UseNode@1
