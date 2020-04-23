@@ -1,9 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { UploadImageService } from 'src/app/shared/upload-image.service';
-import { Observable } from 'rxjs';
-
-
-
 
 @Component({
   selector: 'app-upload',
@@ -12,14 +8,9 @@ import { Observable } from 'rxjs';
   providers: [UploadImageService]
 })
 export class UploadComponent implements OnInit {
-
-
-constructor(
-  private imageservice: UploadImageService
-  ) { }
-
-
-
+imageUrl: string = "https://www.pdxcityclub.org/wp-content/plugins/fundlycrm/assets/images/default-donation.jpg";
+fileToUpload: File = null;
+  constructor() { }
 
   ngOnInit(): void {
   }

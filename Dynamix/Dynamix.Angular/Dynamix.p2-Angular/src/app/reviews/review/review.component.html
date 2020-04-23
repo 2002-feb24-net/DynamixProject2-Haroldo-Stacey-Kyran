@@ -1,1 +1,57 @@
-<p>review works!</p>
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/w3css/3/w3.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  </head>
+
+  <body>
+  <form #form="ngForm" (submit)="onSubmit(form)" autocomplete="off">
+    <input type="hidden" name="CreatorID" #UserId="ngModel" [(ngModel)]="service.formData.CreatorID">
+
+
+    <div class="form-group">
+      <label>Title</label>
+      <input name="Title" #Title="ngModel" [(ngModel)]="service.formData.Title" class="form-control" required>
+
+    </div>
+    <div class="form-group">
+      <label>Comment</label>
+      <input name="Comment" #Comment="ngModel" [(ngModel)]="service.formData.ReviewComment" class="form-control">
+
+    </div>
+
+    <div class="form-group">
+      <label>Location</label>
+      <input name="Location" #Comment="ngModel" [(ngModel)]="service.formData.LocationID" class="form-control">
+
+    </div>
+
+
+
+
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label>Photo</label>
+        <input name="Photo" #Photo="ngModel" [(ngModel)]="service.formData.ReviewURL" class="form-control">
+
+      </div>
+      <div class="form-group  col-md-6">
+        <label>Rating</label>
+        <input name="Rating" #Rating="ngModel" [(ngModel)]="service.formData.Rating" class="form-control">
+      </div>
+
+    </div>
+    <div class="form-group">
+      <button type="submit" [disabled]="form.invalid" class="btn btn-lg btn-block">SUBMIT</button>
+    </div>
+
+  </form>
+
+</body>
+</html>

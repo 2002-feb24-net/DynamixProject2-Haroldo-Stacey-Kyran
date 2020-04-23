@@ -39,8 +39,6 @@ export class SignUpComponent implements OnInit {
   else
     this.updateRecord(form);
 
-    
-
   }
 
   insertRecord(form: NgForm){

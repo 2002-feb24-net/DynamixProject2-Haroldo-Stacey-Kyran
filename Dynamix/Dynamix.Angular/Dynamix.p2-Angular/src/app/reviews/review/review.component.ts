@@ -33,7 +33,7 @@ export class ReviewComponent implements OnInit {
   }
 
   onSubmit(form: NgForm) {
-    if (form.value.UserId == null)
+    if (form.value.CreatorID == null)
     this.insertRecord(form);
   else
     this.updateRecord(form);

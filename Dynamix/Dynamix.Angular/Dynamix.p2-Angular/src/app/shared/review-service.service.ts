@@ -21,11 +21,11 @@ readonly rootURL = "https://localhost:44329/api"
   }
 
   putEmployee(formData : Review){
-    return this._http.put(this.rootURL+'/Reviews/',formData);
+    return this._http.put(this.rootURL+'/Reviews'+formData.CreatorID,formData);
 
    }
 
    deleteEmployee(id : number){
-    return this._http.delete(this.rootURL+'/Reviews/'+id);
+    return this._http.delete(this.rootURL+'/Reviews'+id);
    }
 }

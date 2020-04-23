@@ -1,8 +1,8 @@
 .navbar {
   position: relative;
-  min-height: 20x;
+  min-height: 80x;
   margin-bottom: 0px;
-  border: 5px solid transparent;
+  border: 1px solid transparent;
 }
 
 input[type=text], input[type=password] {
