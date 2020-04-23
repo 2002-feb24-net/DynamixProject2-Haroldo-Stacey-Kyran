@@ -150,6 +150,7 @@ stages:
   variables:
     nodeVersion: 13.x
     appDir: Dynamix/Dynamix.Angular/Dynamix.p2-Angular
+    
 
   jobs:
 
@@ -164,17 +165,26 @@ stages:
         versionSpec: $(nodeVersion)
       displayName: node $(nodeVersion)
 
+
+
+    - task: DeleteFiles@1
+      inputs:
+        SourceFolder: 
+        Contents: '$(Build.ArtifactStagingDirectory)/app'
+      displayName: "delete old build staging app"
+
+
     - script: npm ci
       workingDirectory: $(appDir)
       displayName: npm install
 
 
 
-    - script: npx ng build --outputPath $(Build.ArtifactStagingDirectory)/appNg --prod
+    - script: npx ng build --outputPath $(Build.ArtifactStagingDirectory)/app --prod
       workingDirectory: $(appDir)
       displayName: ng build
 
-    - publish: $(Build.ArtifactStagingDirectory)/appNg
+    - publish: $(Build.ArtifactStagingDirectory)/app
       artifact: app
       displayName: artifact publish app
 
@@ -201,7 +211,7 @@ stages:
           steps:
 
           - download: current
-            artifact: appNg
+            artifact: app
             displayName: artifact download app
 
 
@@ -213,7 +223,7 @@ stages:
                 azureSubscription: 'Azure subscription 1(1221fe95-8e35-45f8-ae94-5e2cf04ba808)'
                 appType: 'webApp'
                 WebAppName: 'DynamixHK'
-                packageForLinux: '$(Pipeline.Workspace)/appNg'
+                packageForLinux: '$(Pipeline.Workspace)/app'
             displayName: azure app service deploy angular
 
 
