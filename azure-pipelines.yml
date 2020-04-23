@@ -35,7 +35,7 @@ steps:
 
 
 - script: |
-    dotnet build Dynamix
+    dotnet build Dynamix/Dynamix.RestAPI
   displayName: 'dotnet build'
 
 - task: SonarCloudAnalyze@1
@@ -60,10 +60,8 @@ steps:
 
 
 
-- task: DotNetCoreCLI@2
-  inputs:
-    command: 'publish'
-    publishWebProjects: true
+- script: |
+    dotnet publish Dynamix/Dynamix.RestAPI
   displayName: 'dotnet publish'
 
 
