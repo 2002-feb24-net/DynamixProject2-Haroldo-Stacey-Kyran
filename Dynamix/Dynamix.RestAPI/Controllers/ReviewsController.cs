@@ -6,6 +6,8 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Dynamix.API.Models;
+using Dynamix.API.Interfaces;
+using Dynamix.API.Repositories;
 
 namespace Dynamix.API.Controllers
 {
@@ -14,31 +16,36 @@ namespace Dynamix.API.Controllers
     public class ReviewsController : ControllerBase
     {
         private readonly DbDynamixContext _context;
+        private readonly IReviewRepository reviewRepo;
 
-        public ReviewsController(DbDynamixContext context)
+        // This controller is decoupled from DbContext except for the PUT method
+
+        public ReviewsController(DbDynamixContext context, IReviewRepository reviewRepository)
         {
             _context = context;
+            reviewRepo = reviewRepository;
         }
 
         // GET: api/Reviews
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Review>>> GetReview()
         {
-            return await _context.Review.ToListAsync();
+            var list = await reviewRepo.ToListAsync();
+            return Ok(list);
         }
 
         // GET: api/Reviews/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Review>> GetReview(int id)
         {
-            var review = await _context.Review.FindAsync(id);
+            var review = await reviewRepo.FindAsync(id);
 
             if (review == null)
             {
                 return NotFound();
             }
 
-            return review;
+            return Ok(review);
         }
 
 
@@ -50,11 +57,14 @@ namespace Dynamix.API.Controllers
                 return BadRequest();
             }
 
+            // ef core 
+            // _context.Entry(review).State = EntityState.Modified;
+
             _context.Entry(review).State = EntityState.Modified;
 
             try
             {
-                await _context.SaveChangesAsync();
+                await reviewRepo.SaveChangesAsync();
             }
             catch (DbUpdateConcurrencyException)
             {
@@ -77,8 +87,8 @@ namespace Dynamix.API.Controllers
         [HttpPost]
         public async Task<ActionResult<Review>> PostReview(Review review)
         {
-            _context.Review.Add(review);
-            await _context.SaveChangesAsync();
+            reviewRepo.Add(review);
+            await reviewRepo.SaveChangesAsync();
 
             return CreatedAtAction("GetReview", new { id = review.ReviewId }, review);
         }
@@ -87,21 +97,21 @@ namespace Dynamix.API.Controllers
         [HttpDelete("{id}")]
         public async Task<ActionResult<Review>> DeleteReview(int id)
         {
-            var review = await _context.Review.FindAsync(id);
+            var review = await reviewRepo.FindAsync(id);
             if (review == null)
             {
                 return NotFound();
             }
 
-            _context.Review.Remove(review);
-            await _context.SaveChangesAsync();
+            reviewRepo.Remove(review);
+            await reviewRepo.SaveChangesAsync();
 
             return review;
         }
 
         private bool ReviewExists(int id)
         {
-            return _context.Review.Any(e => e.ReviewId == id);
+            return reviewRepo.Any(e => e.ReviewId == id);
         }
     }
 }

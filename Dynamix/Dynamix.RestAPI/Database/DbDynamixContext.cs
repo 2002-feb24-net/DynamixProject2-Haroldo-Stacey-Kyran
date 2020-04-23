@@ -15,6 +15,11 @@ namespace Dynamix.API.Models
         {
         }
 
+        /*//required by startup
+        public DbDynamixContext(DbContextOptions options) : base(options)
+        {
+        }*/
+
         public virtual DbSet<Comment> Comment { get; set; }
         public virtual DbSet<EmojiRating> EmojiRating { get; set; }
         public virtual DbSet<Location> Location { get; set; }

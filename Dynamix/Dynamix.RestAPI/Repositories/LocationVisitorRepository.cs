@@ -1,5 +1,6 @@
 ﻿using Dynamix.API.Interfaces;
 using Dynamix.API.Models;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,5 +15,8 @@ namespace Dynamix.API.Repositories
         {
             this.context = context;
         }
+
+        public DbDynamixContext Context => context;
+
     }
 }

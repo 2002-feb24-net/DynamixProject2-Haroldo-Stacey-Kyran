@@ -17,6 +17,7 @@ import { AppRoutingModule, routingComponents } from './app-routing.module';
 import { SignInComponent } from './users/sign-in/sign-in.component';
 import { SignUpComponent } from './users/sign-up/sign-up.component';
 import { UploadComponent } from './home/upload/upload.component';
+import { AboutComponent } from './about/about.component';
 
 @NgModule({
   declarations: [
@@ -28,6 +29,7 @@ import { UploadComponent } from './home/upload/upload.component';
     SignInComponent,
     SignUpComponent,
     UploadComponent,
+    AboutComponent
 
   ],
   imports: [

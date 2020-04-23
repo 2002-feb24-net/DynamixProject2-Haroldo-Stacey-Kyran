@@ -1,3 +1,4 @@
+import { AboutComponent } from './about/about.component';
 import {NgModule} from '@angular/core';
 import {Routes, RouterModule} from '@angular/router';
 import { DashboardComponent } from './dashboard/dashboard.component';
@@ -13,7 +14,8 @@ const routes: Routes = [
   {path: 'home', component: HomeComponent},
   {path: 'users', component: UsersComponent},
   {path: 'sign-up', component: SignUpComponent},
-  {path: 'upload', component: UploadComponent}
+  {path: 'upload', component: UploadComponent},
+  {path: 'about', component: AboutComponent}
 ];
 
 @NgModule({
