@@ -43,7 +43,7 @@ steps:
   displayName: 'dotnet publish'
 
 - script: |
-    cd Dynamix.RestAPI
+    cd Dynamix/Dynamix.RestAPI
   displayName: 'cd to RestAPI'
 
 
