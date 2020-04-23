@@ -42,8 +42,14 @@ steps:
     dotnet publish Dynamix/Dynamix.RestAPI
   displayName: 'dotnet publish'
 
+- script: |
+    cd Dynamix.RestAPI
+  displayName: 'cd to RestAPI'
+
 
 # Azure web app deploy here
+
+
 - task: AzureRmWebAppDeployment@4
   inputs:
     ConnectionType: 'AzureRM'
