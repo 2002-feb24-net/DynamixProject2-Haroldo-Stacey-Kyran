@@ -168,13 +168,17 @@ stages:
       workingDirectory: $(appDir)
       displayName: npm install
 
-    - script: npx ng build --outputPath $(Build.ArtifactStagingDirectory)/app --prod
+
+
+    - script: npx ng build --outputPath $(Build.ArtifactStagingDirectory)/appNg --prod
       workingDirectory: $(appDir)
       displayName: ng build
 
-    - publish: $(Build.ArtifactStagingDirectory)/app
+    - publish: $(Build.ArtifactStagingDirectory)/appNg
       artifact: app
       displayName: artifact publish app
+
+
 
 
 
@@ -197,7 +201,7 @@ stages:
           steps:
 
           - download: current
-            artifact: app
+            artifact: appNg
             displayName: artifact download app
 
 
@@ -209,7 +213,7 @@ stages:
                 azureSubscription: 'Azure subscription 1(1221fe95-8e35-45f8-ae94-5e2cf04ba808)'
                 appType: 'webApp'
                 WebAppName: 'DynamixHK'
-                packageForLinux: '$(Pipeline.Workspace)/app'
+                packageForLinux: '$(Pipeline.Workspace)/appNg'
             displayName: azure app service deploy angular
 
 
