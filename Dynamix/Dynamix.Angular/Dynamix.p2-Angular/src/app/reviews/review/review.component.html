@@ -10,11 +10,11 @@
 
   <body>
   <form #form="ngForm" (submit)="onSubmit(form)" autocomplete="off">
-    <input type="hidden" name="CreatorID" #UserId="ngModel" [(ngModel)]="service.formData.ReviewID">
+    <input type="hidden" name="ReviewID" #ReviewID="ngModel" [(ngModel)]="service.formData.ReviewID">
 
     <div class="form-group">
       <label>Creator</label>
-      <input name="Creator" #Creator="ngModel" [(ngModel)]="service.formData.CreatorID" class="form-control" required>
+      <input name="CreatorID" #CreatorID="ngModel" [(ngModel)]="service.formData.CreatorID" class="form-control" required>
 
     </div>
 
@@ -31,7 +31,7 @@
 
     <div class="form-group">
       <label>Location</label>
-      <input name="Location" #Comment="ngModel" [(ngModel)]="service.formData.LocationID" class="form-control">
+      <input name="LocationID" #LocationID="ngModel" [(ngModel)]="service.formData.LocationID" class="form-control">
 
     </div>
 
@@ -41,12 +41,12 @@
     <div class="form-row">
       <div class="form-group col-md-6">
         <label>Photo</label>
-        <input name="Photo" #Photo="ngModel" [(ngModel)]="service.formData.ReviewURL" class="form-control">
+        <input name="ReviewURL" #ReviewURL="ngModel" [(ngModel)]="service.formData.ReviewURL" class="form-control">
 
       </div>
       <div class="form-group  col-md-6">
         <label>Rating</label>
-        <input name="Rating" #Rating="ngModel" [(ngModel)]="service.formData.RatingID" class="form-control">
+        <input name="RatingID" #RatingID="ngModel" [(ngModel)]="service.formData.RatingID" class="form-control">
       </div>
 
     </div>

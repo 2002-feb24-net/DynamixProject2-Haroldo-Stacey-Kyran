@@ -22,6 +22,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ReviewsComponent } from './reviews/reviews.component';
 import { ReviewListComponent } from './reviews/review-list/review-list.component';
 import { ReviewComponent } from './reviews/review/review.component';
+import { ReviewServiceService } from './shared/review-service.service';
 
 @NgModule({
   declarations: [
@@ -47,7 +48,7 @@ import { ReviewComponent } from './reviews/review/review.component';
     BrowserAnimationsModule,
     ToastrModule .forRoot()
   ],
-  providers: [UserService],
+  providers: [UserService, ReviewServiceService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
