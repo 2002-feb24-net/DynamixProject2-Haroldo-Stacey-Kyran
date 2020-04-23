@@ -123,6 +123,9 @@ namespace Dynamix.API.Models
 
                 entity.Property(e => e.LocationId).HasColumnName("LocationID");
 
+                entity.Property(e => e.ReviewText).HasColumnName("ReviewText");
+                // added reviewText
+
                 entity.Property(e => e.RatingEmojiId).HasColumnName("RatingEmojiID");
 
                 entity.Property(e => e.ReviewImageUrl).HasColumnName("ReviewImageURL");
