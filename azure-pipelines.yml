@@ -6,6 +6,161 @@
 trigger:
 - master
 
+stages:
+
+- stage: build
+
+  variables:
+    sdkVersion: 3.1.x
+    solutionPath: Dynamix
+    buildConfiguration: Release
+
+  jobs:
+
+  - job: build
+
+    pool:
+     vmImage: 'ubuntu-latest'
+
+
+    steps:
+
+     - task: UseDotNet@2
+       inputs:
+         packageType: sdk
+         version: $(sdkVersion)
+       displayName: dotnet $(sdkVersion)
+
+     - task: DotNetCoreCLI@2
+       inputs:
+         command: publish
+         publishWebProjects: true
+         arguments:
+           --configuration $(buildConfiguration)
+           --output $(Build.ArtifactStagingDirectory)/app
+         modifyOutputPath: false
+         zipAfterPublish: false
+       displayName: dotnet publish
+
+     - publish: $(Build.ArtifactStagingDirectory)/app
+       artifact: app
+       displayName: artifact publish app
+
+
+  - job: test
+
+    pool:
+      vmImage: ubuntu-latest
+
+    steps:
+
+    - task: UseDotNet@2
+      inputs:
+        packageType: sdk
+        version: 2.1.x
+      displayName: dotnet 2.1.x
+    
+    - task: SonarCloudPrepare@1
+      inputs:
+        SonarCloud: 'Dynamixp2'
+        organization: '2002-feb24-net'
+        scannerMode: 'MSBuild'
+        projectKey: '2002-feb24-net_DynamixProject2-Haroldo-Stacey-Kyran'
+        extraProperties: |
+          # Additional properties that will be passed to the scanner, 
+          # Put one key=value per line, example:
+          sonar.exclusions=**/lib/**
+    - task: UseDotNet@2
+      inputs:
+        packageType: sdk
+        version: $(sdkVersion)
+      displayName: dotnet $(sdkVersion)
+
+    - script: dotnet build
+        --configuration $(buildConfiguration)
+      workingDirectory: $(solutionPath)
+      displayName: dotnet build
+
+    - script: dotnet test
+        --configuration $(buildConfiguration)
+        --logger trx
+        --no-build
+        --results-directory $(Common.TestResultsDirectory)
+        --settings coverlet.runsettings
+      workingDirectory: $(solutionPath)
+      continueOnError: true
+      displayName: dotnet test
+
+    - task: SonarCloudAnalyze@1
+      displayName: sonarcloud analysis run
+
+    - task: PublishTestResults@2
+      condition: succeededOrFailed()
+      inputs:
+        testRunner: VSTest
+        testResultsFiles: $(Common.TestResultsDirectory)/*.trx
+      displayName: test results build publish
+
+    - task: PublishCodeCoverageResults@1
+      condition: succeededOrFailed()
+      inputs:
+        codeCoverageTool: Cobertura
+        summaryFileLocation: $(Common.TestResultsDirectory)/*/coverage.cobertura.xml
+      displayName: code coverage build publish
+
+    - task: SonarCloudPublish@1
+      condition: succeededOrFailed()
+      displayName: sonarcloud results build publish
+
+
+- stage: deploy
+  condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
+  dependsOn: build
+
+  jobs:
+
+  - deployment: deploy_dev
+
+    pool:
+      vmImage: ubuntu-latest
+
+    environment: dev
+
+    strategy:
+      runOnce:
+        deploy:
+          steps:
+
+          - download: current
+            artifact: app
+            displayName: artifact download app
+
+
+
+          - task: AzureRmWebAppDeployment@4
+            inputs:
+              ConnectionType: 'AzureRM'
+              azureSubscription: 'Azure subscription 1(1221fe95-8e35-45f8-ae94-5e2cf04ba808)'
+              appType: 'webApp'
+              WebAppName: 'Dynamix'
+              packageForLinux: $(Pipeline.Workspace)/app
+
+
+
+
+
+
+
+#old not working:
+
+# Starter pipeline
+# Start with a minimal pipeline that you can customize to build and deploy your code.
+# Add steps that build, run tests, deploy, and more:
+# https://aka.ms/yaml
+
+trigger:
+- master
+
 pr: none
 
 pool:
@@ -21,16 +176,7 @@ steps:
   displayName: 'Show directory contents'
 
 
-- task: SonarCloudPrepare@1
-  inputs:
-    SonarCloud: 'Dynamixp2'
-    organization: '2002-feb24-net'
-    scannerMode: 'MSBuild'
-    projectKey: '2002-feb24-net_DynamixProject2-Haroldo-Stacey-Kyran'
-    extraProperties: |
-      # Additional properties that will be passed to the scanner, 
-      # Put one key=value per line, example:
-       sonar.exclusions=**/lib/**
+
 
 
 
@@ -50,13 +196,7 @@ steps:
 # Azure web app deploy here
 
 
-- task: AzureRmWebAppDeployment@4
-  inputs:
-    ConnectionType: 'AzureRM'
-    azureSubscription: 'Azure subscription 1(1221fe95-8e35-45f8-ae94-5e2cf04ba808)'
-    appType: 'webApp'
-    WebAppName: 'Dynamix'
-    packageForLinux: '$(System.DefaultWorkingDirectory)/**/*.zip'
+
 
 - task: SonarCloudAnalyze@1
 
@@ -121,13 +261,13 @@ steps:
     publishLocation: 'Container'
 
 
+           # - task: AzureRmWebAppDeployment@4
+            #  inputs:
+             #   ConnectionType: 'AzureRM'
+              #  azureSubscription: 'Azure subscription 1(1221fe95-8e35-45f8-ae94-5e2cf04ba808)'
+               # appType: 'webApp'
+                #WebAppName: 'DynamixHK'
+                #packageForLinux: '$(System.DefaultWorkingDirectory)/**/*.zip'
+                #RuntimeStack: 'NODE|12-lts'
+              #displayName: 'Deploy angular to app service'
 
-- task: AzureRmWebAppDeployment@4
-  inputs:
-    ConnectionType: 'AzureRM'
-    azureSubscription: 'Azure subscription 1(1221fe95-8e35-45f8-ae94-5e2cf04ba808)'
-    appType: 'webAppLinux'
-    WebAppName: 'DynamixHK'
-    packageForLinux: '$(System.DefaultWorkingDirectory)/**/*.zip'
-    RuntimeStack: 'NODE|12-lts'
-  displayName: 'Deploy angular to app service'
