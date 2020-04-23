@@ -92,7 +92,11 @@ namespace Dynamix.WebAPI
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+
+
             });
+
+            
         }
     }
 }
