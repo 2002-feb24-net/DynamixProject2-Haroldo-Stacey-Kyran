@@ -6,6 +6,8 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Dynamix.API.Models;
+using Dynamix.API.Repositories;
+using Dynamix.API.Interfaces;
 
 namespace Dynamix.API.Controllers
 {
@@ -14,24 +16,30 @@ namespace Dynamix.API.Controllers
     public class UsersController : ControllerBase
     {
         private readonly DbDynamixContext _context;
+        private readonly IUsersRepository userRepo;
 
-        public UsersController(DbDynamixContext context)
+        // Controller is decoupled from EF Core Dbcontext except for the put method
+
+        public UsersController(DbDynamixContext context, IUsersRepository userRepository)
         {
             _context = context;
+            userRepo = userRepository;
         }
 
         // GET: api/Users
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Users>>> GetUsers()
         {
-            return await _context.Users.ToListAsync();
+            var list = await userRepo.ToListAsync();
+
+            return Ok(list);
         }
 
         // GET: api/Users/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Users>> GetUsers(int id)
         {
-            var users = await _context.Users.FindAsync(id);
+            var users = await userRepo.FindAsync(id);
 
             if (users == null)
             {
@@ -56,7 +64,7 @@ namespace Dynamix.API.Controllers
 
             try
             {
-                await _context.SaveChangesAsync();
+                await userRepo.SaveChangesAsync();
             }
             catch (DbUpdateConcurrencyException)
             {
@@ -79,8 +87,8 @@ namespace Dynamix.API.Controllers
         [HttpPost]
         public async Task<ActionResult<Users>> PostUsers(Users users)
         {
-            _context.Users.Add(users);
-            await _context.SaveChangesAsync();
+            userRepo.Add(users);
+            await userRepo.SaveChangesAsync();
 
             return CreatedAtAction("GetUsers", new { id = users.UserId }, users);
         }
@@ -96,14 +104,14 @@ namespace Dynamix.API.Controllers
             }
 
             _context.Users.Remove(users);
-            await _context.SaveChangesAsync();
+            await userRepo.SaveChangesAsync();
 
             return users;
         }
 
         private bool UsersExists(int id)
         {
-            return _context.Users.Any(e => e.UserId == id);
+            return userRepo.Any(e => e.UserId == id);
         }
     }
 }

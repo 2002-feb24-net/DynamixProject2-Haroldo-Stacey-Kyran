@@ -9,13 +9,14 @@ using System.Threading.Tasks;
 namespace Dynamix.API.Repositories
 {
 
-    public abstract class Repository<TEntity> : IRepository<TEntity> where TEntity : class
+    public abstract class Repository<TEntity>  where TEntity : class
     {
-        DbDynamixContext _context;
+        public DbDynamixContext _context = new DbDynamixContext();
         /*public Repository(DbDynamixContext context)
         {
             this._context = context;
             // dependency injection
+
         }*/
         public void Add(TEntity entity)
         {
@@ -25,6 +26,11 @@ namespace Dynamix.API.Repositories
         public void AddRange(IEnumerable<TEntity> entities)
         {
             _context.Set<TEntity>().AddRange(entities);
+        }
+        
+        public IEnumerable<TEntity> Find (int id)
+        {
+            yield return _context.Set<TEntity>().Find(id);
         }
 
         public IEnumerable<TEntity> Find(Expression<Func<TEntity, bool>> predicate, string includeName) // only include one navigational property
@@ -47,49 +53,28 @@ namespace Dynamix.API.Repositories
             return _context.Set<TEntity>().Where(predicate);
         }
 
+        public async Task<TEntity> FindAsync(int id)
+        {
+            return await _context.Set<TEntity>().FindAsync(id);
+        }
+
         public TEntity Get(int id)
         {
             return _context.Set<TEntity>().Find(id); //return single object of class
         }
 
-
-
-
-        /* public IEnumerable<TEntity> Include(TEntity predicate)
-         {
-             return _context.Set<TEntity>().Include("predicate");
-         }*/
-
-        /* public object Include(Func<object, object> p)
-         {
-             return _context.Set<TEntity>().Include(p => p.);
-         }*/
-
-        /*public IQueryable<T> Include<T>(params Expression<Func<T, object>>[] includes)
-    where T : class
+        public async Task<IEnumerable<TEntity>> GetAll()
         {
-            if (includes != null)
-            {
-                _context = includes.Aggregate(_context,
-                          (current, include) => current.Include(include));
-            }
+            return await _context.Set<TEntity>().ToListAsync();
+        }
 
-            return _context;
-        }*/
-
-
-        /* public IEnumerable<TEntity> Include(Expression<Func<TEntity>> predicate1, Expression<Func<TEntity>> predicate2)
-         {
-             return _context.Set<TEntity>().Include(predicate1).Include(predicate2);
-         }*/
-
-
-
-
-
-        public IEnumerable<TEntity> GetAll()
+        /// <summary>
+        /// same as get all. Returns a list
+        /// </summary>
+        /// <returns></returns>
+        public async Task<IEnumerable<TEntity>> ToListAsync()
         {
-            return _context.Set<TEntity>().ToList();
+            return await _context.Set<TEntity>().ToListAsync();
         }
 
         public void Remove(TEntity entity)
@@ -112,15 +97,56 @@ namespace Dynamix.API.Repositories
             else
                 return true;    // there is something
         }
+
+        // need to implement a put method but it requires indepth knowledge of how entity state works
+
         public void Save()
         {
             _context.SaveChanges();
         }
+
+        /// <summary>
+        /// Implementation (wraps SaveChangesAsync from Entity Framework in case their methods change. Centralized place here to update their saveasync for example)
+        /// </summary>
+        /// <returns></returns>
+        public async Task<int> SaveChangesAsync()
+        {
+          return await  _context.SaveChangesAsync();
+        }
     }
 
-    public interface IRepository<TEntity> where TEntity : class
+    
+
+
+
+
+    /* public IEnumerable<TEntity> Include(TEntity predicate)
+     {
+         return _context.Set<TEntity>().Include("predicate");
+     }*/
+
+    /* public object Include(Func<object, object> p)
+     {
+         return _context.Set<TEntity>().Include(p => p.);
+     }*/
+
+    /*public IQueryable<T> Include<T>(params Expression<Func<T, object>>[] includes)
+where T : class
     {
-    }
+        if (includes != null)
+        {
+            _context = includes.Aggregate(_context,
+                      (current, include) => current.Include(include));
+        }
+
+        return _context;
+    }*/
+
+
+    /* public IEnumerable<TEntity> Include(Expression<Func<TEntity>> predicate1, Expression<Func<TEntity>> predicate2)
+     {
+         return _context.Set<TEntity>().Include(predicate1).Include(predicate2);
+     }*/
 }
 
 

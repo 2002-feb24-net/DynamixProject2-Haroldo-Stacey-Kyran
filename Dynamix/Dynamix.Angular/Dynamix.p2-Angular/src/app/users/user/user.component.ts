@@ -36,6 +36,8 @@ export class UserComponent implements OnInit {
   else
     this.updateRecord(form);
 
+    // put redirect here on submit to login page to prevent duplicate accounts being made (by users who think thier account registration didn't save to database)
+
   }
 
   insertRecord(form: NgForm){
