@@ -34,7 +34,7 @@ export class SignUpComponent implements OnInit {
   }
 
   onSubmit(form: NgForm) {
-    if (form.value.EmployeeID == null)
+    if (form.value.UserId == null)
     this.insertRecord(form);
   else
     this.updateRecord(form);

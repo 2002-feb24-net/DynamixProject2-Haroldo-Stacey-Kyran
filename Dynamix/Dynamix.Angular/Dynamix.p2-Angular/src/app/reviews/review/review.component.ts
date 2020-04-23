@@ -22,7 +22,7 @@ export class ReviewComponent implements OnInit {
     if (form != null)
     form.resetForm();
   this.service.formData = {
-    CreatorID: null,
+    ReviewID: null,
     Title: '',
     ReviewComment: '',
     ReviewURL: '',
@@ -44,7 +44,7 @@ export class ReviewComponent implements OnInit {
 
   insertRecord(form: NgForm){
     this.service.postUsers(form.value).subscribe(res => {
-      this.toastr.success('Success!', 'Account Created');
+      this.toastr.success('Success!', 'Review Created');
       this.resetForm(form);
       this.service.refreshList();
   });

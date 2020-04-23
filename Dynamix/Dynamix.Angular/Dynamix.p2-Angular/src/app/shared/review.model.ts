@@ -4,5 +4,5 @@ export class Review {
   ReviewURL: string;
   Rating: number;
   LocationID: number;
-  CreatorID: number;
+  ReviewID: number;
 }

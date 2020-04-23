@@ -11,6 +11,7 @@ list: Review[];
 readonly rootURL = "https://localhost:44329/api"
 
   constructor(private _http: HttpClient) { }
+
   refreshList(){
     this._http.get(this.rootURL+'/Reviews')
     .toPromise().then(res => this.list = res as Review[]);
@@ -21,7 +22,7 @@ readonly rootURL = "https://localhost:44329/api"
   }
 
   putEmployee(formData : Review){
-    return this._http.put(this.rootURL+'/Reviews'+formData.CreatorID,formData);
+    return this._http.put(this.rootURL+'/Reviews'+formData.ReviewID,formData);
 
    }
 
