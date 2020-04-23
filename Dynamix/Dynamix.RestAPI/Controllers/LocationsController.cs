@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Dynamix.API.Models;
+using Dynamix.API.Interfaces;
 
 namespace Dynamix.API.Controllers
 {
@@ -14,24 +15,30 @@ namespace Dynamix.API.Controllers
     public class LocationsController : ControllerBase
     {
         private readonly DbDynamixContext _context;
+        private readonly ILocationRepository locationRepo;
 
-        public LocationsController(DbDynamixContext context)
+        // This controller is decoupled from DbContext except for the PUT method
+
+
+        public LocationsController(DbDynamixContext context, ILocationRepository locationRepository)
         {
             _context = context;
+            locationRepo = locationRepository;
         }
 
         // GET: api/Locations
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Location>>> GetLocation()
         {
-            return await _context.Location.ToListAsync();
+             var list = await locationRepo.ToListAsync();
+            return Ok(list);
         }
 
         // GET: api/Locations/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Location>> GetLocation(int id)
         {
-            var location = await _context.Location.FindAsync(id);
+            var location = await locationRepo.FindAsync(id);
 
             if (location == null)
             {
@@ -56,7 +63,7 @@ namespace Dynamix.API.Controllers
 
             try
             {
-                await _context.SaveChangesAsync();
+                await locationRepo.SaveChangesAsync();
             }
             catch (DbUpdateConcurrencyException)
             {
@@ -79,8 +86,8 @@ namespace Dynamix.API.Controllers
         [HttpPost]
         public async Task<ActionResult<Location>> PostLocation(Location location)
         {
-            _context.Location.Add(location);
-            await _context.SaveChangesAsync();
+            locationRepo.Add(location);
+            await locationRepo.SaveChangesAsync();
 
             return CreatedAtAction("GetLocation", new { id = location.LocationId }, location);
         }
@@ -89,21 +96,21 @@ namespace Dynamix.API.Controllers
         [HttpDelete("{id}")]
         public async Task<ActionResult<Location>> DeleteLocation(int id)
         {
-            var location = await _context.Location.FindAsync(id);
+            var location = await locationRepo.FindAsync(id);
             if (location == null)
             {
                 return NotFound();
             }
 
-            _context.Location.Remove(location);
-            await _context.SaveChangesAsync();
+            locationRepo.Remove(location);
+            await locationRepo.SaveChangesAsync();
 
             return location;
         }
 
         private bool LocationExists(int id)
         {
-            return _context.Location.Any(e => e.LocationId == id);
+            return locationRepo.Any(e => e.LocationId == id);
         }
     }
 }

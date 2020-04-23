@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Dynamix.API.Models;
+using Dynamix.API.Interfaces;
 
 namespace Dynamix.API.Controllers
 {
@@ -14,10 +15,15 @@ namespace Dynamix.API.Controllers
     public class CommentsController : ControllerBase
     {
         private readonly DbDynamixContext _context;
+        private readonly ICommentRepository commentRepo;
 
-        public CommentsController(DbDynamixContext context)
+        // This controller is decoupled from DbContext except for the PUT method
+
+
+        public CommentsController(DbDynamixContext context, ICommentRepository commentRepository)
         {
             _context = context;
+            commentRepo = commentRepository;
         }
 
         // GET: api/Comments

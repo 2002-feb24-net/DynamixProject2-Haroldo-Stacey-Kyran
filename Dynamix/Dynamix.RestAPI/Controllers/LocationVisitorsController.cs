@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Dynamix.API.Models;
+using Dynamix.API.Interfaces;
 
 namespace Dynamix.API.Controllers
 {
@@ -14,24 +15,30 @@ namespace Dynamix.API.Controllers
     public class LocationVisitorsController : ControllerBase
     {
         private readonly DbDynamixContext _context;
+        private readonly ILocationVisitorRepository locationVisitorRepo;
 
-        public LocationVisitorsController(DbDynamixContext context)
+        // This controller is decoupled from DbContext except for the PUT method
+
+
+        public LocationVisitorsController(DbDynamixContext context, ILocationVisitorRepository locationVisitorRepository)
         {
             _context = context;
+            locationVisitorRepo = locationVisitorRepository;
         }
 
         // GET: api/LocationVisitors
         [HttpGet]
         public async Task<ActionResult<IEnumerable<LocationVisitor>>> GetLocationVisitor()
         {
-            return await _context.LocationVisitor.ToListAsync();
+            var list = await locationVisitorRepo.ToListAsync();
+            return Ok(list);
         }
 
         // GET: api/LocationVisitors/5
         [HttpGet("{id}")]
         public async Task<ActionResult<LocationVisitor>> GetLocationVisitor(int id)
         {
-            var locationVisitor = await _context.LocationVisitor.FindAsync(id);
+            var locationVisitor = await locationVisitorRepo.FindAsync(id);
 
             if (locationVisitor == null)
             {
@@ -56,7 +63,7 @@ namespace Dynamix.API.Controllers
 
             try
             {
-                await _context.SaveChangesAsync();
+                await locationVisitorRepo.SaveChangesAsync();
             }
             catch (DbUpdateConcurrencyException)
             {
@@ -82,7 +89,7 @@ namespace Dynamix.API.Controllers
             _context.LocationVisitor.Add(locationVisitor);
             try
             {
-                await _context.SaveChangesAsync();
+                await locationVisitorRepo.SaveChangesAsync();
             }
             catch (DbUpdateException)
             {
@@ -103,21 +110,21 @@ namespace Dynamix.API.Controllers
         [HttpDelete("{id}")]
         public async Task<ActionResult<LocationVisitor>> DeleteLocationVisitor(int id)
         {
-            var locationVisitor = await _context.LocationVisitor.FindAsync(id);
+            var locationVisitor = await locationVisitorRepo.FindAsync(id);
             if (locationVisitor == null)
             {
                 return NotFound();
             }
 
-            _context.LocationVisitor.Remove(locationVisitor);
-            await _context.SaveChangesAsync();
+            locationVisitorRepo.Remove(locationVisitor);
+            await locationVisitorRepo.SaveChangesAsync();
 
             return locationVisitor;
         }
 
         private bool LocationVisitorExists(int id)
         {
-            return _context.LocationVisitor.Any(e => e.LocationVisitorId == id);
+            return locationVisitorRepo.Any(e => e.LocationVisitorId == id);
         }
     }
 }
