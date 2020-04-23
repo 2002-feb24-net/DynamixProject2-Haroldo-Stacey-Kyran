@@ -31,14 +31,16 @@ namespace Dynamix.Client
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<DbDynamixContext>(x => x.UseSqlServer(Configuration.GetConnectionString("DbDynamix")));
-/*            services.AddScoped<ICommentRepository, CommentRepository>();
-*/            services.AddLogging(logger =>
-            {
-                logger.AddConfiguration(Configuration.GetSection("Logging"));
-/*                logger.AddAzureWebAppDiagnostics();
-*/                logger.AddConsole();
-                logger.AddDebug();
-            });
+            /*            services.AddScoped<ICommentRepository, CommentRepository>();
+            */
+            services.AddLogging(logger =>
+          {
+              logger.AddConfiguration(Configuration.GetSection("Logging"));
+                /*                logger.AddAzureWebAppDiagnostics();
+                */
+              logger.AddConsole();
+              logger.AddDebug();
+          });
             services.AddControllersWithViews();
         }
 
@@ -66,8 +68,9 @@ namespace Dynamix.Client
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
-                
-        }
+                    pattern: "{controller=Home}/{action=Index}/{id?}")
+                ;
+
+            });
     }
-}
+    } }

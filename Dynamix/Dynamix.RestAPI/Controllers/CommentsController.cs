@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Dynamix.API.Models;
 using Dynamix.API.Interfaces;
+using Microsoft.Extensions.Logging;
 
 namespace Dynamix.API.Controllers
 {
@@ -16,14 +17,16 @@ namespace Dynamix.API.Controllers
     {
         private readonly DbDynamixContext _context;
         private readonly ICommentRepository commentRepo;
+        private ILogger logger;
 
         // This controller is decoupled from DbContext except for the PUT method
 
 
-        public CommentsController(DbDynamixContext context, ICommentRepository commentRepository)
+        public CommentsController(DbDynamixContext context, ICommentRepository commentRepository, ILogger logger)
         {
             _context = context;
             commentRepo = commentRepository;
+            this.logger = logger;
         }
 
         // GET: api/Comments
