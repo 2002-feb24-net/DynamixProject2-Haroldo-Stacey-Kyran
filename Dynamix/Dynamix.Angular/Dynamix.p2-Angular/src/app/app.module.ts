@@ -4,6 +4,7 @@ import {FormsModule} from '@angular/forms';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {ToastrModule} from 'ngx-toastr';
 
+
 import { AppComponent } from './app.component';
 import { UsersComponent } from './users/users.component';
 import { UserComponent } from './users/user/user.component';
@@ -15,6 +16,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { AppRoutingModule, routingComponents } from './app-routing.module';
 import { SignInComponent } from './users/sign-in/sign-in.component';
 import { SignUpComponent } from './users/sign-up/sign-up.component';
+import { UploadComponent } from './home/upload/upload.component';
 import { AboutComponent } from './about/about.component';
 
 @NgModule({
@@ -26,7 +28,8 @@ import { AboutComponent } from './about/about.component';
     UserListComponent,
     SignInComponent,
     SignUpComponent,
-    AboutComponent,
+    UploadComponent,
+    AboutComponent
 
   ],
   imports: [
