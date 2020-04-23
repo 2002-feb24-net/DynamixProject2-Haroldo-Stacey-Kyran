@@ -28,7 +28,7 @@
     </nav>
 
 <form #form="ngForm" (submit)="onSubmit(form)" autocomplete="off">
-  <input type="hidden" name="EmployeeID" #UserId="ngModel" [(ngModel)]="service.formData.UserId">
+  <input type="hidden" name="UserId" #UserId="ngModel" [(ngModel)]="service.formData.UserId">
   <div class="form-group">
     <label style="color:black">Full Name</label>
     <input name="FullName" #FullName="ngModel" [(ngModel)]="service.formData.FullName" class="form-control" required>

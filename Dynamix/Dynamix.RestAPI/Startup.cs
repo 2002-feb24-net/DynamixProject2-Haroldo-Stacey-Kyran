@@ -60,9 +60,10 @@ namespace Dynamix.WebAPI
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Client API", Version = "v1" });
             });
             services.AddLogging();
-/*            services.AddApplicationInsightsTelemetry(); enabled through app service to not have to maintain key in appsettings
-*/            services.AddControllers();
-            
+            /*            services.AddApplicationInsightsTelemetry(); enabled through app service to not have to maintain key in appsettings
+            */
+            services.AddControllers().AddNewtonsoftJson();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

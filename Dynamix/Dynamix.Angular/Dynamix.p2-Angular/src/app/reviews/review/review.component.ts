@@ -26,9 +26,9 @@ export class ReviewComponent implements OnInit {
     Title: '',
     ReviewComment: '',
     ReviewURL: '',
-    RatingID: 1,
-    LocationID: 1,
-    CreatorID: 1
+    RatingID: null,
+    LocationID: null,
+    CreatorID: null
 
     }
   }
