@@ -145,7 +145,7 @@ stages:
               WebAppName: 'Dynamix'
               packageForLinux: $(Pipeline.Workspace)/app
 
-- stage: build angular
+- stage: 'build angular'
 
   variables:
     nodeVersion: 13.x
@@ -178,8 +178,8 @@ stages:
 
 
 
-- stage: deploy angular
-  condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
+- stage: 'deploy angular'
+  #condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
   dependsOn: build
 
   jobs:
