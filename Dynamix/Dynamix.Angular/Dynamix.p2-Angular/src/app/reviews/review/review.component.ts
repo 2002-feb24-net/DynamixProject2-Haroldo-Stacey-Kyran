@@ -26,14 +26,15 @@ export class ReviewComponent implements OnInit {
     Title: '',
     ReviewComment: '',
     ReviewURL: '',
-    Rating: 0,
-    LocationID: 0
+    RatingID: 1,
+    LocationID: 1,
+    CreatorID: 1
 
     }
   }
 
   onSubmit(form: NgForm) {
-    if (form.value.CreatorID == null)
+    if (form.value.ReviewID == null)
     this.insertRecord(form);
   else
     this.updateRecord(form);
