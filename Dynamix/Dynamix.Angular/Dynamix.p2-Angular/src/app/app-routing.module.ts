@@ -15,7 +15,8 @@ const routes: Routes = [
   {path: 'users', component: UsersComponent},
   {path: 'sign-up', component: SignUpComponent},
   {path: 'upload', component: UploadComponent},
-  {path: 'about', component: AboutComponent}
+  {path: 'about', component: AboutComponent},
+  {path: '**', component: HomeComponent} // all invalid url arguments go to home
 ];
 
 @NgModule({
