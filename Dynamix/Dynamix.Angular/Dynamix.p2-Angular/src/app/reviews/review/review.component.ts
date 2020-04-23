@@ -24,11 +24,11 @@ export class ReviewComponent implements OnInit {
   this.service.formData = {
     ReviewID: null,
     Title: '',
-    ReviewComment: '',
-    ReviewURL: '',
-    RatingID: 1,
+    ReviewText: '',
+    ReviewImageURL: '',
+    RatingEmojiID: 1,
     LocationID: 1,
-    CreatorID: 1
+    CreatorUserID: 1
 
     }
   }

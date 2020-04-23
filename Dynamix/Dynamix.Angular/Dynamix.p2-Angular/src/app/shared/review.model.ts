@@ -1,9 +1,9 @@
 export class Review {
   ReviewID: number;
   Title: string;
-  ReviewComment: string;
-  ReviewURL: string;
-  RatingID: number;
+  ReviewText: string;
+  ReviewImageURL: string;
+  RatingEmojiID: number;
   LocationID: number;
-  CreatorID: number;
+  CreatorUserID: number;
 }

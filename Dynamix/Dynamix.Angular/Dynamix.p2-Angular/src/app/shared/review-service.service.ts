@@ -8,7 +8,7 @@ import {Review} from './review.model';
 export class ReviewServiceService {
 formData: Review;
 list: Review[];
-readonly rootURL = "https://localhost:44329/api"
+readonly rootURL = "https://dynamix.azurewebsites.net/api"
 
   constructor(private _http: HttpClient) { }
 

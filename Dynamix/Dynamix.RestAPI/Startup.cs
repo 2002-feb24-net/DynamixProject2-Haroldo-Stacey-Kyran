@@ -44,10 +44,13 @@ namespace Dynamix.WebAPI
             services.AddCors(options =>
             {
                 options.AddPolicy("AllowLocalAndAppServiceAngular", builder =>
-                    builder.WithOrigins("http://localhost:4200", "https://dynamixhk.azurewebsites.net/ ")
+                    builder.WithOrigins("http://localhost:4200", "https://dynamixhk.azurewebsites.net/ ", "https://localhost:4200", "http://dynamixhk.azurewebsites.net/ ")
                         .AllowAnyMethod()
                         .AllowAnyHeader());
             });
+
+            
+
             services.AddDbContext<DbDynamixContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DbDynamix")));
             services.AddScoped<IUsersRepository, UserRepository>();
             services.AddScoped<ILocationRepository, LocationRepository>();
