@@ -18,6 +18,10 @@ import { SignInComponent } from './users/sign-in/sign-in.component';
 import { SignUpComponent } from './users/sign-up/sign-up.component';
 import { UploadComponent } from './home/upload/upload.component';
 import { AboutComponent } from './about/about.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { ReviewsComponent } from './reviews/reviews.component';
+import { ReviewListComponent } from './reviews/review-list/review-list.component';
+import { ReviewComponent } from './reviews/review/review.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +33,10 @@ import { AboutComponent } from './about/about.component';
     SignInComponent,
     SignUpComponent,
     UploadComponent,
-    AboutComponent
+    AboutComponent,
+    ReviewsComponent,
+    ReviewListComponent,
+    ReviewComponent
 
   ],
   imports: [

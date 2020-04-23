@@ -11,7 +11,8 @@ namespace Dynamix.API.Models
         }
 
         public int EmojiRatingId { get; set; }
-        public byte[] EmojiPicture { get; set; }
+        public string EmojiPictureUrl { get; set; }
+        public string EmojiDescription { get; set; }
 
         public virtual ICollection<Review> Review { get; set; }
     }

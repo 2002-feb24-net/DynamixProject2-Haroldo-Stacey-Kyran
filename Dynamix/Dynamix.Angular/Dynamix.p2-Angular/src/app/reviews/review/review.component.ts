@@ -1,34 +1,34 @@
 import { Component, OnInit } from '@angular/core';
-import { UserService } from 'src/app/shared/user.service';
-import { NgForm } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
-import { User } from 'src/app/shared/user.model';
+import { ReviewServiceService } from 'src/app/shared/review-service.service';
+import { NgForm } from '@angular/forms';
 
 @Component({
-  selector: 'app-user',
-  templateUrl: './user.component.html',
-  styleUrls: ['./user.component.css']
+  selector: 'app-review',
+  templateUrl: './review.component.html',
+  styleUrls: ['./review.component.css']
 })
-export class UserComponent implements OnInit {
-user: User;
-emailPattern: "^[a-z0-9._%]"
+export class ReviewComponent implements OnInit {
+
   constructor(
-    public service: UserService,
-    private toastr: ToastrService) { }
+    public service: ReviewServiceService,
+    private toastr: ToastrService
+  ) { }
 
   ngOnInit() {
     this.resetForm();
   }
-
   resetForm(form?: NgForm){
     if (form != null)
     form.resetForm();
   this.service.formData = {
-    UserId: null,
-    FullName: '',
-    Email: '',
-    Username: '',
-    Password: ''
+    CreatorID: null,
+    Title: '',
+    ReviewComment: '',
+    ReviewURL: '',
+    Rating: 0,
+    LocationID: 0
+
     }
   }
 
@@ -57,5 +57,6 @@ emailPattern: "^[a-z0-9._%]"
       this.service.refreshList();
     });
   }
+
 
 }
