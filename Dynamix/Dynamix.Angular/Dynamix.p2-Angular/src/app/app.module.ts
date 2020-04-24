@@ -25,6 +25,7 @@ import { ReviewListComponent } from './reviews/review-list/review-list.component
 import { ReviewComponent } from './reviews/review/review.component';
 import { ReviewServiceService } from './shared/review-service.service';
 import { CommentComponent } from './comment/comment.component';
+import { LocationComponent } from './location/location.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +41,8 @@ import { CommentComponent } from './comment/comment.component';
     ReviewsComponent,
     ReviewListComponent,
     ReviewComponent,
-    CommentComponent],
+    CommentComponent,
+    LocationComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
