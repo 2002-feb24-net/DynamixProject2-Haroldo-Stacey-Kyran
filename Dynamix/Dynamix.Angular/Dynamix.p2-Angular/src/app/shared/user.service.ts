@@ -14,8 +14,9 @@ export class UserService {
   constructor(private _http: HttpClient) { }
 
   refreshList(){
-    this._http.get(this.rootURL+'/Users')
-    .toPromise().then(res => this.list = res as User[]);
+    // this._http.get(this.rootURL+'/Users')
+    // .toPromise().then(res => this.list = res as User[]);
+    return this._http.get<User[]>(this.rootURL+'/Users');
   }
 
   postUsers(formData: User){

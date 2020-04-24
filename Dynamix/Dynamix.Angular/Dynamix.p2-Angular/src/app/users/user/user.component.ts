@@ -25,7 +25,7 @@ emailPattern: "^[a-z0-9._%]"
     form.resetForm();
   this.service.formData = {
     UserId: null,
-    FullName: '',
+    fullName: '',
     Email: '',
     Username: '',
     Password: ''
