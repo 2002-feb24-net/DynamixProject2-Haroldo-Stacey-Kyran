@@ -19,48 +19,25 @@
         <li><a routerLink="/home">Home</a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        <li><a onclick="document.getElementById('id01').style.display='block'"><span class="glyphicon glyphicon-log-in" routerLink=""></span> Login</a></li>
-        <div class="jumbtron">
-          <h1 class="display-4 text-center">Create Account</h1>
-          <hr>
-          <div class="row">
-            <div class="col-md-5">
-              <app-user></app-user>
-            </div>
-            <div class="col-md-7">
-              <app-user-list></app-user-list>
-            </div>
-          </div>
-        </div>
-
-
+        <li><a routerLink="/login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
       </ul>
     </div>
   </nav>
-  <!-- <div>
-    <img class="homePhotos" src="https://wallpapershome.com/images/pages/pic_h/378.jpg" style="width:100%">
-  </div> -->
 
+  <div class="jumbtron">
+    <h1 class="display-4 text-center" style="color:black">Create Account</h1>
+    <hr>
+    <div class="row">
+      <div class="col-md-5">
+        <app-user></app-user>
+      </div>
+    </div>
+  </div>
 
-
-
-  <h2>Registered Users</h2>
-
-  <table class="table">
-    <!-- <thead>
-      <tr>
-        <th *ngFor="let head of users" scope="col">{{head}} </th>
-      </tr>
-    </thead> -->
-    <tbody>
-      <tr *ngFor="let user of users">
-        <td scope="row">{{user.fullName}}</td>
-      </tr>
-    </tbody>
-</table>
-
-
-
+  <div class="col-md-7" style="color: black;">
+    <h2>Registered Users</h2>
+      <app-user-list></app-user-list>
+  </div>
 </body>
   </html>
 

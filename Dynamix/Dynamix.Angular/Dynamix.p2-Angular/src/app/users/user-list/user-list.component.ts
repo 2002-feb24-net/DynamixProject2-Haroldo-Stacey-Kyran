@@ -9,14 +9,23 @@ import { User } from 'src/app/shared/user.model';
   styleUrls: ['./user-list.component.css']
 })
 export class UserListComponent implements OnInit {
-
+users: User[];
+selectedUser: User;
   constructor(
     public service: UserService,
     private toastr: ToastrService
   ) { }
 
   ngOnInit() {
-    this.service.refreshList();
+    this.getUsers();
+  }
+  onSelect(user: User): void {
+    this.selectedUser = user;
+  }
+
+  getUsers(): void {
+    this.service.refreshList()
+    .subscribe(users =>{ this.users = users; console.log(users)});
   }
 
   populateForm(emp: User) {
