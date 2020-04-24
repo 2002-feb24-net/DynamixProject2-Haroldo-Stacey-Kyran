@@ -40,17 +40,8 @@ namespace Dynamix.WebAPI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc(options => options.EnableEndpointRouting = false);
-            services.AddCors(options =>
-            {
-                options.AddPolicy("AllowLocalAndAppServiceAngular", builder =>
-                    builder.WithOrigins("http://localhost:4200", "https://dynamixhk.azurewebsites.net/ ", "https://localhost:4200", "http://dynamixhk.azurewebsites.net/ ")
-                        .AllowAnyMethod()
-                        .AllowAnyHeader());
-            });
-
-            
-
+/*            services.AddMvc(options => options.EnableEndpointRouting = false);
+*/           
             services.AddDbContext<DbDynamixContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DbDynamix")));
             services.AddScoped<IUsersRepository, UserRepository>();
             services.AddScoped<ILocationRepository, LocationRepository>();
@@ -63,9 +54,23 @@ namespace Dynamix.WebAPI
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Client API", Version = "v1" });
             });
             services.AddLogging();
-/*            services.AddApplicationInsightsTelemetry(); enabled through app service to not have to maintain key in appsettings
-*/            services.AddControllers();
-            
+            /*            services.AddApplicationInsightsTelemetry(); enabled through app service to not have to maintain key in appsettings
+            */
+            services.AddCors(options =>
+            {
+                options.AddPolicy("AllowLocalAndAppServiceAngular", builder =>
+                    builder.WithOrigins(
+                                        "http://localhost:4200")
+                        .AllowAnyMethod()
+                        .AllowAnyHeader());
+            });
+            services.AddControllers(options =>
+            {
+                options.OutputFormatters.RemoveType<StringOutputFormatter>();
+                options.ReturnHttpNotAcceptable = true;
+                options.SuppressAsyncSuffixInActionNames = false;
+            });
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -79,7 +84,6 @@ namespace Dynamix.WebAPI
 
             app.UseCors("AllowLocalAndAppServiceAngular");
 
-            app.UseMvc();
 
             app.UseHttpsRedirection();
 
