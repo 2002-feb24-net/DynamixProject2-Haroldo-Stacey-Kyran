@@ -32,9 +32,9 @@ selectedUser: User;
     this.service.formData = Object.assign({}, emp);
   }
 
-  onDelete(id: number) {
+  async onDelete(id: number) {
     if (confirm('Are you sure to delete this record?')) {
-      this.service.deleteEmployee(id).subscribe(res => {
+      (await this.service.deleteEmployee(id)).subscribe(res => {
         this.service.refreshList();
         this.toastr.warning('Deleted successfully', 'EMP. Register');
       });
