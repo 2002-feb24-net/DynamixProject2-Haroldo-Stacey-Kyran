@@ -60,7 +60,7 @@ namespace Dynamix.WebAPI
             {
                 options.AddPolicy("AllowLocalAndAppServiceAngular", builder =>
                     builder.WithOrigins(
-                                        "http://localhost:4200")
+                                        "http://localhost:4200", "*")
                         .AllowAnyMethod()
                         .AllowAnyHeader());
             });
