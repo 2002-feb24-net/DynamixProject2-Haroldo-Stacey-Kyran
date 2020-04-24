@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -16,7 +17,7 @@ export class CommentService {
   }
   getCommentById()
   {
-   return this.http.get<Comment>(`${this.rootURL}api/Comment/` + this.formData.id).toPromise();
+  //  return this.http.get<Comment>(`${this.rootURL}api/Comment/` + this.formData.id).toPromise();
   }
   CreateUser(comment: Comment){
     return this.http.post<Comment>(`${this.rootURL}api/Comment`, comment)
@@ -28,13 +29,13 @@ export class CommentService {
    .toPromise();
   }
  UpdateUser(comment: Comment){
-  return this.http.put<Comment>(`${this.rootURL}api/Comment/${comment.id}`, comment)
-  .toPromise();
+  // return this.http.put<Comment>(`${this.rootURL}api/Comment/${comment.id}`, comment)
+  // .toPromise();
  }
   refreshList(){
    this.http.get<Comment>(`${this.rootURL}api/Comment`)
    .toPromise()
-   .then(res => this.list = res as Comment);
+  //  .then(res => this.list = res as Comment);
  }
 
 }
