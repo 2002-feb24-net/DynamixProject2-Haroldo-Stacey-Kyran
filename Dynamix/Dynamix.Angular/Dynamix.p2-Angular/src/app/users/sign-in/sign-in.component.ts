@@ -8,8 +8,8 @@ import {UserService} from 'src/app/shared/user.service';
   styleUrls: ['./sign-in.component.css']
 })
 export class SignInComponent implements OnInit {
-  Username:string = "";
-  userPass:string = "";
+  userFullName:string = "";
+  userPassword:string = "";
   logInError:boolean = false;
 
   constructor(
@@ -23,10 +23,10 @@ export class SignInComponent implements OnInit {
   }
 
   onSubmit() {
-    this.service.getUser(this.Username)
+    this.service.getUser(this.userFullName)
         .then(resp=> {
           debugger;
-          if(resp[0].Password.trim()==this.userPass){
+          if(resp[0].Password.trim()==this.userPassword){
             this.service.loggedIn=true;
             this.router.navigate(['/home']);
           } else {

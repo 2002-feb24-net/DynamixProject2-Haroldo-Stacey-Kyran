@@ -43,4 +43,10 @@ export class UserService {
       this.rootURL+"/Users"+username,httpOptions).toPromise();
   }
 
+  async addUser(user:User) {
+    console.log(user);
+    return this._http.post<User> (
+      this.rootURL,JSON.stringify(user),httpOptions).toPromise();
+  }
+
 }
