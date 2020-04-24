@@ -11,7 +11,8 @@ import { Review } from 'src/app/shared/review.model';
   styleUrls: ['./review-list.component.css']
 })
 export class ReviewListComponent implements OnInit {
-
+reviews: Review[];
+selectedReview: Review;
 
   constructor(
     public service: ReviewServiceService,
@@ -19,16 +20,25 @@ export class ReviewListComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.service.refreshList();
+    this.getReviews();
   }
+  onSelect(review: Review): void {
+    this.selectedReview = review;
+  }
+
+  getReviews(): void {
+     this.service.refreshList()
+    .subscribe(reviews =>{ this.reviews = reviews; console.log(reviews)});
+  }
+
 
   populateForm(emp: Review) {
     this.service.formData = Object.assign({}, emp);
   }
 
-  onDelete(id: number) {
+  async onDelete(id: number) {
     if (confirm('Are you sure to delete this record?')) {
-      this.service.deleteEmployee(id).subscribe(res => {
+      (await this.service.deleteEmployee(id)).subscribe(res => {
         this.service.refreshList();
         this.toastr.warning('Deleted successfully', 'EMP. Register');
       });

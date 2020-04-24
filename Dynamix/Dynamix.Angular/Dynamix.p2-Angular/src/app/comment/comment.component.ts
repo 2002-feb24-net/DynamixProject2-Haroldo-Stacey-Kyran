@@ -37,7 +37,7 @@ export class CommentComponent implements OnInit {
 
   }
 
-  insertRecord(form: NgForm){
+  async insertRecord(form: NgForm){
     this.commentService.PostComment(form.value).subscribe(res => {
       this.toastr.success('Success!', 'Comment Submitted');
       this.resetForm(form);
@@ -45,7 +45,7 @@ export class CommentComponent implements OnInit {
   });
   }
 
-  updateRecord(form: NgForm) {
+  async updateRecord(form: NgForm) {
     this.commentService.UpdateComment(form.value).subscribe(res => {
       this.toastr.info('Updated Successfully', 'EMP. Register');
       this.resetForm(form);
