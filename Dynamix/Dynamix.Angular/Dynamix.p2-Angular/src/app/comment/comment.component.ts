@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { ToastrService } from 'ngx-toastr';
+import { NgForm } from '@angular/forms';
+import { CommentService } from '../shared/comment.service';
 
 @Component({
   selector: 'app-comment',
@@ -7,11 +10,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CommentComponent implements OnInit {
 
-  constructor() { }
-
-  ngOnInit(): void {
-  }constructor(
-    public commentService: Service,
+  constructor(
+    public commentService: CommentService,
     private toastr: ToastrService) { }
 
   ngOnInit() {
@@ -21,12 +21,11 @@ export class CommentComponent implements OnInit {
   resetForm(form?: NgForm){
     if (form != null)
     form.resetForm();
-  this.service.formData = {
-    UserId: null,
-    fullName: '',
-    Email: '',
-    Username: '',
-    Password: ''
+  this.commentService.formData = {
+    CommentID: null,
+    CommentText: '',
+    ReviewID: 1,
+    UserID: 1
     }
   }
 
@@ -39,18 +38,18 @@ export class CommentComponent implements OnInit {
   }
 
   insertRecord(form: NgForm){
-    this.service.postUsers(form.value).subscribe(res => {
+    this.commentService.PostComment(form.value).subscribe(res => {
       this.toastr.success('Success!', 'Account Created');
       this.resetForm(form);
-      this.service.refreshList();
+      this.commentService.refreshList();
   });
   }
 
   updateRecord(form: NgForm) {
-    this.service.putEmployee(form.value).subscribe(res => {
+    this.commentService.UpdateComment(form.value).subscribe(res => {
       this.toastr.info('Updated Successfully', 'EMP. Register');
       this.resetForm(form);
-      this.service.refreshList();
+      this.commentService.refreshList();
     });
   }
 
