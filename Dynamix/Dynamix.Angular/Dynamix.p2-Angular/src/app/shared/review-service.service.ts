@@ -18,7 +18,8 @@ readonly rootURL = "https://dynamix.azurewebsites.net/api"
   }
 
   postUsers(formData: Review){
-    return this._http.post(this.rootURL+'/Reviews',formData);
+    return this._http.post<Comment>(`${this.rootURL}/Reviews/`, formData);
+
   }
 
   putEmployee(formData : Review){
