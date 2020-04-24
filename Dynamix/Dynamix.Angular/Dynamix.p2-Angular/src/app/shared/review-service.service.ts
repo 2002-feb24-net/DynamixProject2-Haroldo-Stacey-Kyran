@@ -13,8 +13,7 @@ readonly rootURL = "https://dynamix.azurewebsites.net/api"
   constructor(private _http: HttpClient) { }
 
   refreshList(){
-    return this._http.get<Review[]>(this.rootURL+'/Reviews')
-    ;
+    return this._http.get<Review[]>(this.rootURL+'/Reviews');
   }
 
   postUsers(formData: Review){
