@@ -1,3 +1,5 @@
+import { User } from 'src/app/shared/user.model';
+import { Comment } from './comment.model';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
@@ -13,29 +15,27 @@ export class CommentService {
 
   getComment() {
     return this.http.get<Comment[]>(`${this.rootURL}/Comments`)
-      .toPromise();
+      ;
   }
   getCommentById()
   {
-  //  return this.http.get<Comment>(`${this.rootURL}api/Comment/` + this.formData.id).toPromise();
+   return this.http.get<Comment>(`${this.rootURL}/Comments/` + this.formData.CommentID);
   }
-  CreateUser(comment: Comment){
-    return this.http.post<Comment>(`${this.rootURL}api/Comment`, comment)
-      .toPromise();
+  PostComment(formData:Comment){
+    return this.http.post<Comment>(`${this.rootURL}/Comments/`, formData);
+
   }
   getCommentUpdateById(id : number)
   {
-   return this.http.get<Comment>(`${this.rootURL}api/Comment/${id}`)
-   .toPromise();
+   return this.http.get<Comment>(`${this.rootURL}api/Comments/${id}`)
+   ;
   }
- UpdateUser(comment: Comment){
-  // return this.http.put<Comment>(`${this.rootURL}api/Comment/${comment.id}`, comment)
-  // .toPromise();
+ UpdateComment(comment: Comment){
+  return this.http.put<Comment>(`${this.rootURL}Comments/${comment.CommentID}`, comment)
+  ;
  }
   refreshList(){
-   this.http.get<Comment>(`${this.rootURL}api/Comment`)
-   .toPromise()
-  //  .then(res => this.list = res as Comment);
+   this.http.get<Comment>(`${this.rootURL}/Comments`)
  }
 
 }

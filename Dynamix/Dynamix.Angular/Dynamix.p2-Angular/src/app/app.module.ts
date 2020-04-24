@@ -1,3 +1,4 @@
+import { CommentService } from './shared/comment.service';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import {FormsModule} from '@angular/forms';
@@ -48,7 +49,7 @@ import { CommentComponent } from './comment/comment.component';
     BrowserAnimationsModule,
     ToastrModule .forRoot()
   ],
-  providers: [UserService, ReviewServiceService],
+  providers: [UserService, ReviewServiceService, CommentService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

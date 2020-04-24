@@ -1,3 +1,4 @@
+import { CommentComponent } from './comment/comment.component';
 import { UserListComponent } from './users/user-list/user-list.component';
 import { AboutComponent } from './about/about.component';
 import {NgModule} from '@angular/core';
@@ -22,6 +23,7 @@ const routes: Routes = [
   {path: 'rate', component: ReviewsComponent},
   {path: 'login', component: SignInComponent},
   {path: 'user-list', component: UserListComponent},
+  {path: 'comment', component: CommentComponent},
   {path: '**', component: HomeComponent} // all invalid url arguments go to home
 ];
 

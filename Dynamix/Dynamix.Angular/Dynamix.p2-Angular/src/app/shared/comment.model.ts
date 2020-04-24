@@ -1,7 +1,7 @@
 export class Comment {
-commentID: number;
-commentText: string;
-reviewID: number;
-userID: number;
 
+  CommentID: number;
+  CommentText: string;
+  ReviewID: number;
+  UserID: number;
 }

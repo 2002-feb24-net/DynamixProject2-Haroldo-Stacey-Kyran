@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
-import { CommentService } from '../shared/comment.service';
 import { NgForm } from '@angular/forms';
+import { CommentService } from '../shared/comment.service';
 
 @Component({
   selector: 'app-comment',
@@ -10,48 +10,47 @@ import { NgForm } from '@angular/forms';
 })
 export class CommentComponent implements OnInit {
 
-
-
   constructor(
     public commentService: CommentService,
     private toastr: ToastrService) { }
 
   ngOnInit() {
-    // this.resetForm();
+    this.resetForm();
   }
 
-  // resetForm(form?: NgForm){
-  //   if (form != null)
-  //   form.resetForm();
-  // this.commentService.formData = {
-  //   // commentID: null,
+  resetForm(form?: NgForm){
+    if (form != null)
+    form.resetForm();
+  this.commentService.formData = {
+    CommentID: null,
+    CommentText: '',
+    ReviewID: 1,
+    UserID: 1
+    }
+  }
 
+  onSubmit(form: NgForm) {
+    if (form.value.UserId == null)
+    this.insertRecord(form);
+  else
+    this.updateRecord(form);
 
-  //   }
-  // }
+  }
 
-  // onSubmit(form: NgForm) {
-  //   if (form.value.UserId == null)
-  //   this.insertRecord(form);
-  // else
-  //   this.updateRecord(form);
+  insertRecord(form: NgForm){
+    this.commentService.PostComment(form.value).subscribe(res => {
+      this.toastr.success('Success!', 'Comment Submitted');
+      this.resetForm(form);
+      this.commentService.refreshList();
+  });
+  }
 
-  // }
-
-  // insertRecord(form: NgForm){
-  //   this.commentService.postUsers(form.value).subscribe(res => {
-  //     this.toastr.success('Success!', 'Account Created');
-  //     this.resetForm(form);
-  //     this.commentService.refreshList();
-  // });
-  // }
-
-  // updateRecord(form: NgForm) {
-  //   this.commentService.putEmployee(form.value).subscribe(res => {
-  //     this.toastr.info('Updated Successfully', 'EMP. Register');
-  //     this.resetForm(form);
-  //     this.commentService.refreshList();
-  //   });
-  // }
+  updateRecord(form: NgForm) {
+    this.commentService.UpdateComment(form.value).subscribe(res => {
+      this.toastr.info('Updated Successfully', 'EMP. Register');
+      this.resetForm(form);
+      this.commentService.refreshList();
+    });
+  }
 
 }

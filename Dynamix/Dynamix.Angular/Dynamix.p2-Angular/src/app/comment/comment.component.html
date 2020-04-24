@@ -28,29 +28,25 @@
     </nav>
 
 <form #form="ngForm" (submit)="onSubmit(form)" autocomplete="off">
-  <input type="hidden" name="EmployeeID" #UserId="ngModel" [(ngModel)]="service.formData.UserId">
+  <input type="hidden" name="EmployeeID" #UserId="ngModel" [(ngModel)]="commentService.formData.CommentID">
   <div class="form-group">
     <label style="color:black">Full Name</label>
-    <input name="fullName" #fullName="ngModel" [(ngModel)]="service.formData.fullName" class="form-control" required>
-    <div class="validation-error" *ngIf="fullName.invalid && fullName.touched">This field is required.</div>
+    <input name="CommentText" #CommentText="ngModel" [(ngModel)]="commentService.formData.CommentText" class="form-control" required>
+    <div class="validation-error" *ngIf="CommentText.invalid && CommentText.touched">This field is required.</div>
 
   </div>
   <div class="form-group">
-    <label style="color:black">Email</label>
-    <input name="Email" #Email="ngModel" [(ngModel)]="service.formData.Email" class="form-control" required>
-    <div class="validation-error" *ngIf="Email.invalid && Email.touched">Email is required.</div>
+    <label style="color:black">ReviewID</label>
+    <input name="ReviewID" #ReviewID="ngModel" [(ngModel)]="commentService.formData.ReviewID" class="form-control" required>
+    <div class="validation-error" *ngIf="ReviewID.invalid && ReviewID.touched">ReviewID is required.</div>
   </div>
   <div class="form-row">
     <div class="form-group col-md-6">
-      <label style="color:black">Username</label>
-      <input name="Username" #Username="ngModel" [(ngModel)]="service.formData.Username" class="form-control" required>
-      <div class="validation-error" *ngIf="Username.invalid && Username.touched">This field is required.</div>
+      <label style="color:black">UserID</label>
+      <input name="UserID" #UserID="ngModel" [(ngModel)]="commentService.formData.UserID" class="form-control" required>
+      <div class="validation-error" *ngIf="UserID.invalid && UserID.touched">This field is required.</div>
     </div>
-    <div class="form-group  col-md-6">
-      <label style="color:black">Password</label>
-      <input name="Password" #Password="ngModel" [(ngModel)]="service.formData.Password" class="form-control" required>
-      <div class="validation-error" *ngIf="Password.invalid && Password.touched">Password is required.</div>
-    </div>
+    
   </div>
   <div class="form-group">
     <button type="submit" [disabled]="form.invalid" class="btn btn-lg btn-block">SUBMIT</button>
