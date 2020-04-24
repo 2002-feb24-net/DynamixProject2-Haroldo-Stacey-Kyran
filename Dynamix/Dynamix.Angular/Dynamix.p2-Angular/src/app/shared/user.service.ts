@@ -25,16 +25,16 @@ export class UserService {
     return this._http.get<User[]>(this.rootURL+'/Users');
   }
 
-  postUsers(formData: User){
+  async postUsers(formData: User){
     return this._http.post(this.rootURL+'/Users',formData);
   }
 
-  putEmployee(formData : User){
+  async putEmployee(formData : User){
     return this._http.put(this.rootURL+'/Users/'+formData.UserId,formData);
 
    }
 
-   deleteEmployee(id : number){
+   async deleteEmployee(id : number){
     return this._http.delete(this.rootURL+'/Users/'+id);
    }
 

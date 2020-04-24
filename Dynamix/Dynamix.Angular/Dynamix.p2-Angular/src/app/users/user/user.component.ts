@@ -42,16 +42,16 @@ emailPattern: "^[a-z0-9._%]"
 
   }
 
-  insertRecord(form: NgForm){
-    this.service.postUsers(form.value).subscribe(res => {
+  async insertRecord(form: NgForm){
+    (await this.service.postUsers(form.value)).subscribe(res => {
       this.toastr.success('Success!', 'Account Created');
       this.resetForm(form);
       this.service.refreshList();
   });
   }
 
-  updateRecord(form: NgForm) {
-    this.service.putEmployee(form.value).subscribe(res => {
+  async updateRecord(form: NgForm) {
+    (await this.service.putEmployee(form.value)).subscribe(res => {
       this.toastr.info('Updated Successfully', 'EMP. Register');
       this.resetForm(form);
       this.service.refreshList();
