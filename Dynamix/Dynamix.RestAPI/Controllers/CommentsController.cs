@@ -17,16 +17,14 @@ namespace Dynamix.API.Controllers
     {
         private readonly DbDynamixContext _context;
         private readonly ICommentRepository commentRepo;
-        private ILogger logger;
 
         // This controller is decoupled from DbContext except for the PUT method
 
 
-        public CommentsController(DbDynamixContext context, ICommentRepository commentRepository, ILogger logger)
+        public CommentsController(DbDynamixContext context, ICommentRepository commentRepository  )
         {
             _context = context;
             commentRepo = commentRepository;
-            this.logger = logger;
         }
 
         // GET: api/Comments

@@ -10,7 +10,6 @@ namespace Dynamix.API.Interfaces
     public interface IEmojiRatingRepository
     {
 
-        public DbDynamixContext Context { get; set; }
 
         public void Add(EmojiRating entity);
 

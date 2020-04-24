@@ -103,7 +103,7 @@ namespace Dynamix.API.Controllers
                 return NotFound();
             }
 
-            _context.Users.Remove(users);
+            userRepo.Remove(users);
             await userRepo.SaveChangesAsync();
 
             return users;
