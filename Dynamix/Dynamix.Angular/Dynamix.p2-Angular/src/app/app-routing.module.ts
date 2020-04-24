@@ -1,3 +1,4 @@
+import { LocationComponent } from './location/location.component';
 import { CommentComponent } from './comment/comment.component';
 import { UserListComponent } from './users/user-list/user-list.component';
 import { AboutComponent } from './about/about.component';
@@ -24,6 +25,7 @@ const routes: Routes = [
   {path: 'login', component: SignInComponent},
   {path: 'user-list', component: UserListComponent},
   {path: 'comment', component: CommentComponent},
+  {path: 'location', component: LocationComponent},
   {path: '**', component: HomeComponent} // all invalid url arguments go to home
 ];
 
