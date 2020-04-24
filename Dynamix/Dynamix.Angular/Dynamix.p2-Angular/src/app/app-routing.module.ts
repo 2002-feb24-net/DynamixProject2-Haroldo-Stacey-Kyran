@@ -1,4 +1,3 @@
-import { LocationComponent } from './location/location.component';
 import { CommentComponent } from './comment/comment.component';
 import { UserListComponent } from './users/user-list/user-list.component';
 import { AboutComponent } from './about/about.component';
@@ -11,7 +10,8 @@ import { SignUpComponent } from './users/sign-up/sign-up.component';
 import { UploadComponent } from './home/upload/upload.component';
 import { ReviewsComponent } from './reviews/reviews.component';
 import { SignInComponent } from './users/sign-in/sign-in.component';
-
+import { ReviewListComponent } from './reviews/review-list/review-list.component';
+import { LocationComponent } from './location/location.component';
 
 const routes: Routes = [
   {path: '', redirectTo: '/dashboard', pathMatch: 'full'},
