@@ -9,7 +9,7 @@ export class UserService {
 
   formData : User;
   list: User[];
-  readonly rootURL = "https://localhost:44329/api"
+  readonly rootURL = "https://dynamix.azurewebsites.net/api"
 
   constructor(private _http: HttpClient) { }
 
