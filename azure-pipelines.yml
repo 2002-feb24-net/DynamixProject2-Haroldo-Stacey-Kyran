@@ -167,11 +167,7 @@ stages:
 
 
 
-    - task: DeleteFiles@1
-      inputs:
-        SourceFolder: 
-        Contents: '$(Build.ArtifactStagingDirectory)/app'
-      displayName: "delete old build staging app"
+
 
 
     - script: npm ci
