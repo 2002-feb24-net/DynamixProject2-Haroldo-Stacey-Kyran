@@ -1,3 +1,4 @@
+import { UserListComponent } from './users/user-list/user-list.component';
 import { AboutComponent } from './about/about.component';
 import {NgModule} from '@angular/core';
 import {Routes, RouterModule} from '@angular/router';
@@ -20,6 +21,7 @@ const routes: Routes = [
   {path: 'about', component: AboutComponent},
   {path: 'rate', component: ReviewsComponent},
   {path: 'login', component: SignInComponent},
+  {path: 'user-list', component: UserListComponent},
   {path: '**', component: HomeComponent} // all invalid url arguments go to home
 ];
 
@@ -30,4 +32,4 @@ exports: [RouterModule]
 })
 
 export class AppRoutingModule {}
-export const routingComponents = [DashboardComponent, HomeComponent, UsersComponent, SignUpComponent, UploadComponent]
+export const routingComponents = [DashboardComponent, HomeComponent, UsersComponent, SignUpComponent, UploadComponent, ReviewsComponent]

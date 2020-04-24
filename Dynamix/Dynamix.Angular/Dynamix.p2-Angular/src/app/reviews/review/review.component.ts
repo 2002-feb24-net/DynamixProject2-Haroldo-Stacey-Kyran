@@ -24,11 +24,11 @@ export class ReviewComponent implements OnInit {
   this.service.formData = {
     ReviewID: null,
     Title: '',
-    ReviewComment: '',
-    ReviewURL: '',
-    RatingID: null,
-    LocationID: null,
-    CreatorID: null
+    ReviewText: '',
+    ReviewImageURL: '',
+    RatingEmojiID: 1,
+    LocationID: 1,
+    CreatorUserID: 1
 
     }
   }
@@ -36,7 +36,7 @@ export class ReviewComponent implements OnInit {
   onSubmit(form: NgForm) {
     if (form.value.ReviewID == null)
     this.insertRecord(form);
-  else
+    else
     this.updateRecord(form);
 
     // put redirect here on submit to login page to prevent duplicate accounts being made (by users who think thier account registration didn't save to database)

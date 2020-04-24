@@ -26,7 +26,7 @@ export class SignUpComponent implements OnInit {
     form.resetForm();
   this.service.formData = {
     UserId: null,
-    FullName: '',
+    fullName: '',
     Email: '',
     Username: '',
     Password: ''

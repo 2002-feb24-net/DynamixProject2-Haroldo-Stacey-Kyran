@@ -15,13 +15,14 @@ export class UserService {
   public loggedIn:boolean = false;
   formData : User;
   list: User[];
-  readonly rootURL = "https://localhost:44329/api"
+  readonly rootURL = "https://dynamix.azurewebsites.net/api"
 
   constructor(private _http: HttpClient) { }
 
   refreshList(){
-    this._http.get(this.rootURL+'/Users')
-    .toPromise().then(res => this.list = res as User[]);
+    // this._http.get(this.rootURL+'/Users')
+    // .toPromise().then(res => this.list = res as User[]);
+    return this._http.get<User[]>(this.rootURL+'/Users');
   }
 
   postUsers(formData: User){

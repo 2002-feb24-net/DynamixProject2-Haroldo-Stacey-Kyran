@@ -145,11 +145,12 @@ stages:
               WebAppName: 'Dynamix'
               packageForLinux: $(Pipeline.Workspace)/app
 
-- stage: build angular
+- stage: BuildNg
 
   variables:
     nodeVersion: 13.x
     appDir: Dynamix/Dynamix.Angular/Dynamix.p2-Angular
+    
 
   jobs:
 
@@ -164,9 +165,20 @@ stages:
         versionSpec: $(nodeVersion)
       displayName: node $(nodeVersion)
 
+
+
+    - task: DeleteFiles@1
+      inputs:
+        SourceFolder: 
+        Contents: '$(Build.ArtifactStagingDirectory)/app'
+      displayName: "delete old build staging app"
+
+
     - script: npm ci
       workingDirectory: $(appDir)
       displayName: npm install
+
+
 
     - script: npx ng build --outputPath $(Build.ArtifactStagingDirectory)/app --prod
       workingDirectory: $(appDir)
@@ -178,9 +190,11 @@ stages:
 
 
 
-- stage: deploy angular
+
+
+- stage: DeployNg
   condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
-  dependsOn: build
+  dependsOn: BuildNg
 
   jobs:
 

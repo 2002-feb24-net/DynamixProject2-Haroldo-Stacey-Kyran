@@ -23,6 +23,7 @@ import { ReviewsComponent } from './reviews/reviews.component';
 import { ReviewListComponent } from './reviews/review-list/review-list.component';
 import { ReviewComponent } from './reviews/review/review.component';
 import { ReviewServiceService } from './shared/review-service.service';
+import { CommentComponent } from './comment/comment.component';
 
 @NgModule({
   declarations: [
@@ -38,9 +39,7 @@ import { ReviewServiceService } from './shared/review-service.service';
     ReviewsComponent,
     ReviewListComponent,
     ReviewComponent,
-
-
-  ],
+    CommentComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
