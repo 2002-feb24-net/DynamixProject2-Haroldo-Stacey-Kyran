@@ -22,15 +22,7 @@ namespace Dynamix.API.Models
         public virtual DbSet<Review> Review { get; set; }
         public virtual DbSet<Users> Users { get; set; }
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            if (!optionsBuilder.IsConfigured)
-            {
-#warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
-                optionsBuilder.UseSqlServer("Server=tcp:2002-training-altamirano.database.windows.net,1433;Initial Catalog=DbDynamix;Persist Security Info=False;User ID=haroldo;Password=EllieIs#1;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;");
-            }
-        }
-
+        
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Comment>(entity =>
@@ -122,6 +114,9 @@ namespace Dynamix.API.Models
                 entity.Property(e => e.CreatorUserId).HasColumnName("CreatorUserID");
 
                 entity.Property(e => e.LocationId).HasColumnName("LocationID");
+
+                entity.Property(e => e.ReviewText).HasColumnName("ReviewText");
+                // added reviewText
 
                 entity.Property(e => e.RatingEmojiId).HasColumnName("RatingEmojiID");
 

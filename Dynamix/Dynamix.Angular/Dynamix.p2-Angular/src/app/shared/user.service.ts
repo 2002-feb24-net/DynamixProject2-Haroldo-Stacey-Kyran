@@ -1,12 +1,18 @@
 import { Injectable } from '@angular/core';
 import { User } from './user.model';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
+
+const httpOptions = {
+  headers: new HttpHeaders({
+    'Content-Type':  'application/json'
+  })
+};
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
-
+  public loggedIn:boolean = false;
   formData : User;
   list: User[];
   readonly rootURL = "https://localhost:44329/api"
@@ -30,5 +36,10 @@ export class UserService {
    deleteEmployee(id : number){
     return this._http.delete(this.rootURL+'/Users/'+id);
    }
+
+   async getUser(username:string) {
+    return this._http.get<User[]> (
+      this.rootURL+"/Users"+username,httpOptions).toPromise();
+  }
 
 }

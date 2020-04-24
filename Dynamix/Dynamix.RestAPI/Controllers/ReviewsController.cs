@@ -52,14 +52,11 @@ namespace Dynamix.API.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> PutReview(int id, Review review)
         {
+
             if (id != review.ReviewId)
             {
                 return BadRequest();
             }
-
-            // ef core 
-            // _context.Entry(review).State = EntityState.Modified;
-
             _context.Entry(review).State = EntityState.Modified;
 
             try

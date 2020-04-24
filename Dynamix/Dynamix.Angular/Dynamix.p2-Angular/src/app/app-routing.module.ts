@@ -7,6 +7,7 @@ import { UsersComponent } from './users/users.component';
 import { SignUpComponent } from './users/sign-up/sign-up.component';
 import { UploadComponent } from './home/upload/upload.component';
 import { ReviewsComponent } from './reviews/reviews.component';
+import { SignInComponent } from './users/sign-in/sign-in.component';
 
 
 const routes: Routes = [
@@ -18,6 +19,7 @@ const routes: Routes = [
   {path: 'upload', component: UploadComponent},
   {path: 'about', component: AboutComponent},
   {path: 'rate', component: ReviewsComponent},
+  {path: 'login', component: SignInComponent},
   {path: '**', component: HomeComponent} // all invalid url arguments go to home
 ];
 

@@ -10,11 +10,11 @@
 
   <body>
   <form #form="ngForm" (submit)="onSubmit(form)" autocomplete="off">
-    <input type="hidden" name="ReviewID" #ReviewID="ngModel" [(ngModel)]="service.formData.ReviewID">
+    <input type="hidden" name="EmployeeID" #ReviewID="ngModel" [(ngModel)]="service.formData.ReviewID">
 
     <div class="form-group">
       <label>Creator</label>
-      <input name="CreatorID" #CreatorID="ngModel" [(ngModel)]="service.formData.CreatorID" class="form-control" required>
+      <input name="Creator" #Creator="ngModel" [(ngModel)]="service.formData.CreatorID" class="form-control" required>
 
     </div>
 
@@ -23,11 +23,11 @@
       <input name="Title" #Title="ngModel" [(ngModel)]="service.formData.Title" class="form-control" required>
 
     </div>
-    <!-- <div class="form-group">
+    <div class="form-group">
       <label>Comment</label>
-      <input name="Comment" #Comment="ngModel" [(ngModel)]="service.formData.ReviewComment" class="form-control">
+      <input name="ReviewComment" #ReviewComment="ngModel" [(ngModel)]="service.formData.ReviewComment" class="form-control">
 
-    </div> -->
+    </div>
 
     <div class="form-group">
       <label>Location</label>

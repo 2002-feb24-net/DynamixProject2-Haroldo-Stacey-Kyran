@@ -62,7 +62,7 @@ namespace Dynamix.WebAPI
             services.AddLogging();
             /*            services.AddApplicationInsightsTelemetry(); enabled through app service to not have to maintain key in appsettings
             */
-            services.AddControllers().AddNewtonsoftJson();
+            services.AddControllers();
 
         }
 

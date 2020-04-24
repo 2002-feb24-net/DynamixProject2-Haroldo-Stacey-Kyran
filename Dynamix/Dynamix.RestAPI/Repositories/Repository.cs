@@ -12,7 +12,7 @@ namespace Dynamix.API.Repositories
     public abstract class Repository<TEntity>  where TEntity : class
     {
         public DbDynamixContext _context = new DbDynamixContext();
-        /*public Repository(DbDynamixContext context)
+/*        public Repository(DbDynamixContext context)
         {
             this._context = context;
             // dependency injection

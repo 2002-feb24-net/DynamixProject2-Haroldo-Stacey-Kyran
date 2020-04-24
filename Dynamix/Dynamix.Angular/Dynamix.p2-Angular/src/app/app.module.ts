@@ -37,7 +37,8 @@ import { ReviewServiceService } from './shared/review-service.service';
     AboutComponent,
     ReviewsComponent,
     ReviewListComponent,
-    ReviewComponent
+    ReviewComponent,
+
 
   ],
   imports: [
