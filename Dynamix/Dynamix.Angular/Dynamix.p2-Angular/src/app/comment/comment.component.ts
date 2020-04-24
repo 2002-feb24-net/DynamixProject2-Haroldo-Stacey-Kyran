@@ -39,7 +39,7 @@ export class CommentComponent implements OnInit {
 
   insertRecord(form: NgForm){
     this.commentService.PostComment(form.value).subscribe(res => {
-      this.toastr.success('Success!', 'Account Created');
+      this.toastr.success('Success!', 'Comment Submitted');
       this.resetForm(form);
       this.commentService.refreshList();
   });

@@ -1,3 +1,4 @@
+import { User } from 'src/app/shared/user.model';
 import { Comment } from './comment.model';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
@@ -20,8 +21,8 @@ export class CommentService {
   {
    return this.http.get<Comment>(`${this.rootURL}/Comments/` + this.formData.CommentID);
   }
-  PostComment(comment: Comment){
-    return this.http.post<Comment>(`${this.rootURL}/Comments/${comment.CommentID}`, comment);
+  PostComment(formData:Comment){
+    return this.http.post<Comment>(`${this.rootURL}/Comments/`, formData);
 
   }
   getCommentUpdateById(id : number)
