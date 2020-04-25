@@ -48,10 +48,11 @@ import { LocationComponent } from './location/location.component';
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
-    BrowserAnimationsModule,
     ToastrModule .forRoot()
   ],
   providers: [UserService, ReviewServiceService, CommentService],
   bootstrap: [AppComponent]
 })
+
+
 export class AppModule { }

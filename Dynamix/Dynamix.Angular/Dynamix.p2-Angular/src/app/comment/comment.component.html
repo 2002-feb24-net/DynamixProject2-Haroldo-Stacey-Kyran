@@ -30,7 +30,7 @@
 <form #form="ngForm" (submit)="onSubmit(form)" autocomplete="off">
   <input type="hidden" name="EmployeeID" #UserId="ngModel" [(ngModel)]="commentService.formData.CommentID">
   <div class="form-group">
-    <label style="color:black">Full Name</label>
+    <label style="color:black">Leave a Comment</label>
     <input name="CommentText" #CommentText="ngModel" [(ngModel)]="commentService.formData.CommentText" class="form-control" required>
     <div class="validation-error" *ngIf="CommentText.invalid && CommentText.touched">This field is required.</div>
 
