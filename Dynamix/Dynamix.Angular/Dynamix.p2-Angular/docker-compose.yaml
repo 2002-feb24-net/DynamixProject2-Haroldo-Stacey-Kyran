@@ -1,0 +1,16 @@
+version: '3'
+services:
+  azure-vote-back:
+    image: redis
+    container_name: dynamix-ang
+    ports:
+        - "5001:80"
+
+  azure-vote-front:
+    build: .
+    image: azure-vote-front
+    container_name: dynamix-front-ang
+    environment:
+      REDIS: azure-vote-back
+    ports:
+        - "8080:80"
